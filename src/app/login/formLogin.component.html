@@ -1,0 +1,30 @@
+<!-- LOGIN -->
+<!-- login form -->
+<form action="" (submit)="login()" class="sky-form boxed">
+    <header>Login</header>
+    <alert *ngIf="message">
+        {{message}}
+    </alert>
+    <fieldset>
+        <section>
+            <label class="input">
+                <i class="icon-append fa fa-envelope"></i>
+                <input required name="email" [(ngModel)]="user.email" type="email" placeholder="Email...">
+            </label>
+        </section>
+        
+        <section>
+            <label class="input">
+                <i class="icon-append fa fa-lock"></i>
+                <input required name="password" [(ngModel)]="user.password" type="password" placeholder="Senha...">
+                <b class="tooltip tooltip-bottom-right">Números, letras e caracteres especiais</b>
+            </label>
+            <div class="note"><a href="#">Esqueceu sua senha?</a></div>
+        </section>
+    </fieldset>
+    <footer>
+        <button type="submit" class="button">Entrar</button>
+    </footer>
+</form>
+<!-- /login form -->
+<!-- /LOGIN -->

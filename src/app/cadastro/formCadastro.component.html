@@ -1,0 +1,75 @@
+<form action="" class="sky-form boxed" (submit)="redirectToDashboard()">
+    <header>Cadastre-se</header>
+    <alert *ngIf="message">
+        {{message}}
+    </alert>
+    <fieldset>
+        <div class="row">
+            <section class="col col-md-6">
+                <label class="input">
+                    <i class="icon-append fa fa-envelope"></i>
+                    <input required type="email" name="email" [(ngModel)]="user.email" placeholder="Email*">
+                    <b class="tooltip tooltip-bottom-right">Obrigatório!</b>
+                </label>
+            </section>
+            
+            <section class="col col-md-6">
+                <label class="input">
+                    <i class="icon-append fa fa-lock"></i>
+                    <input required type="password" name="password" [(ngModel)]="user.password" placeholder="Senha*">
+                    <b class="tooltip tooltip-bottom-right">Obrigatório!</b>
+                </label>
+            </section>
+        </div>
+        <div class="row">
+            <section class="col col-md-6">
+                <label class="input">
+                    <i class="icon-append fa fa-user"></i>
+                    <input required type="text" name="name" [(ngModel)]="user.name" placeholder="Nome*">
+                    <b class="tooltip tooltip-bottom-right">Obrigatório!</b>
+                </label>
+            </section>
+            <section class="col col-md-6">
+                <label class="input">
+                    <i class="icon-append fa fa-user"></i>
+                    <input required type="text" name="sobrenome" [(ngModel)]="user.sobrenome" placeholder="Sobrenome">
+                </label>
+            </section>
+        </div>
+        <div *ngIf="routeId == 1" class="row">
+            <section class="col col-md-12">
+                <label class="textarea">
+                    <i class="icon-prepend fa fa-institution"></i>
+                    <textarea rows="3" name="formacao" [(ngModel)]="user.formacao" placeholder="Fromação"></textarea>
+                </label>
+            </section>
+        </div>
+        <div *ngIf="routeId == 1" class="row">
+            <section class="col col-md-12">
+                <label class="textarea">
+                    <i class="icon-prepend fa fa-gear"></i>
+                    <textarea rows="3" name="habilidades" [(ngModel)]="user.habilidades" placeholder="Habilidades"></textarea>
+                </label>
+            </section>
+        </div>
+        <div class="row">
+            <div class="col-md-2 col-sm-4 col-xs-4"></div>
+            <div class="col-md-5 col-sm-4 col-xs-4">
+                <label class="radio"><input type="radio" value="M" name="sexo" [(ngModel)]="user.sexo" checked=""><i></i>Masculino</label>
+            </div>
+            <div class="col-md-5 col-sm-8 col-xs-8">
+                <label class="radio"><input type="radio" value="F" name="sexo" [(ngModel)]="user.sexo"><i></i>Feminino</label>
+            </div>
+        </div>
+    </fieldset>
+        
+    <fieldset>
+        <section>
+            <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Eu aceito os termos de serviço</label>
+            <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Eu aceito receber notificações por email</label>
+        </section>
+    </fieldset>
+    <footer>
+        <button type="submit" class="button">Cadastrar</button>
+    </footer>
+</form>
