@@ -1,3 +1,4 @@
+import { MapsModule } from './../maps/maps.module';
 import { EventoModule } from './../evento/evento.module';
 import { FormCadastroTecnicoComponent } from './../cadastro/formCadastroTecnico.component';
 import { AlertModule } from './../util/alert/alert.module';
@@ -23,6 +24,7 @@ const appRoutes: Routes = [
         AlertModule,
         CadastroModule,
         EventoModule,
+        MapsModule,
     ],
     declarations: [
         DashboardComponent,

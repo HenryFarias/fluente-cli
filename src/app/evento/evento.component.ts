@@ -32,16 +32,22 @@ export class EventoComponent {
         private httpService: AppHttpService,
     ) {}
 
-    // A cada mudança no componente passa por esse evento
+    // Cada mudança no componente passa por esse evento
+    // Se o dashboard mandar abrir a modal enviando true pelo input, o evento inicia.
     ngOnChanges() {
         if (this.openModal) {
-            
             this.httpService.builder('user').create().then((res) => {
                 this.niveis = res.data.niveis;
                 this.professores = res.data.professores;
             });
 
             this.modal.open();
+                
+            var input = document.getElementById('local');
+            console.log(input);
+            var autocomplete = new google.maps.places.Autocomplete(input);
+            
+            // google.maps.event.addDomListener(window, 'load', initialize);
         }
     }
 
