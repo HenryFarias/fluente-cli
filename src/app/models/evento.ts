@@ -14,14 +14,16 @@ export class Evento {
     public data: Date;
     public duracao: string;
     public descricao: string;
-    public user: User;
+    public professor: User;
+    public dono: User;
     public assunto: Assunto;
     public nivel: Nivel;
     public idioma: Idioma;
     public endereco: Endereco;
 
     constructor() {
-        this.user = new User();
+        this.professor = new User();
+        this.dono = new User();
         this.assunto = new Assunto();
         this.nivel = new Nivel();
         this.idioma = new Idioma();

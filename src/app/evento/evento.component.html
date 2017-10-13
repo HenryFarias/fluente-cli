@@ -46,7 +46,7 @@
                     <div class="row">
                         <section class="col col-md-6">
                             <label class="input">
-                                <input [disabled]="!professores" required name="professor" [(ngModel)]="evento.user.name" placeholder="Professor" type="text" list="listProfessor">
+                                <input [disabled]="!professores" required name="professor" [(ngModel)]="evento.professor.name" placeholder="Professor" type="text" list="listProfessor">
                                 <datalist id="listProfessor">
                                     <option *ngFor="let professor of professores" value="{{professor.name}}"></option>
                                 </datalist>

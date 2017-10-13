@@ -56,6 +56,8 @@ export class EventoComponent {
     }
 
     public saveEvento() {
+        this.evento.dono = JSON.parse(sessionStorage.getItem("user"));
+
         this.httpService.builder('evento').save(this.evento).then(() => {
             this.modal.close();
         }).catch(error => {
