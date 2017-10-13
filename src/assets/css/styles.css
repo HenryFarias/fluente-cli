@@ -42,3 +42,7 @@ main {
     margin-top: -2px;
     width: 250px;
 }
+
+.pac-container {
+    z-index: 1051 !important;
+}

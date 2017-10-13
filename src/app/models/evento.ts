@@ -1,3 +1,4 @@
+import { Idioma } from './idioma';
 import { Cidade } from './cidade';
 import { Endereco } from './endereco';
 import { User } from './user';
@@ -13,15 +14,17 @@ export class Evento {
     public data: Date;
     public duracao: string;
     public descricao: string;
-    public cidade: Cidade;
     public user: User;
     public assunto: Assunto;
     public nivel: Nivel;
+    public idioma: Idioma;
+    public endereco: Endereco;
 
     constructor() {
-        this.cidade = new Cidade();
         this.user = new User();
         this.assunto = new Assunto();
         this.nivel = new Nivel();
+        this.idioma = new Idioma();
+        this.endereco = new Endereco();
     }
 }

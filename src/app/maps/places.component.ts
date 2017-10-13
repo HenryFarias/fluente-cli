@@ -12,9 +12,6 @@ declare let $: any;
 })
 export class PlacesComponent implements OnInit {
 
-    @Input()
-    public teste: string = "places";
-
     @Output()
     public emitirLatLong = new EventEmitter();
 
@@ -27,32 +24,28 @@ export class PlacesComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        console.log(this.teste);
         //carrega o places autocomplete
         this.mapsAPILoader.load().then(() => {
-            console.log(this.teste);
-            let autocomplete = new google.maps.places.Autocomplete($('#' + this.teste), {
-                types: ["address"]
-            });
-            // let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
+            // let autocomplete = new google.maps.places.Autocomplete($('#' + this.teste), {
             //     types: ["address"]
             // });
+            let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
+                types: ["address"]
+            });
 
             autocomplete.addListener("place_changed", () => {
                 this.ngZone.run(() => {
                     //pega o resultado do places
-                    console.log("2");
                     let place: google.maps.places.PlaceResult = autocomplete.getPlace();
             
                     //verifica resultado
                     if (place.geometry === undefined || place.geometry === null) {
-                        console.log("3");
                         return;
                     }
                     
                     // envia os resultados
-                    this.emitirLatLong.emit([place.geometry.location.lat(), place.geometry.location.lng()]);
-                    console.log("4");
+                    // this.emitirLatLong.emit([place.geometry.location.lat(), place.geometry.location.lng()]);
+                    this.emitirLatLong.emit(place);
                 });
             });
         });

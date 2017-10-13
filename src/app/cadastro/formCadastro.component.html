@@ -1,4 +1,4 @@
-<form action="" class="sky-form boxed" (submit)="redirectToDashboard()">
+<form action="" class="sky-form boxed" (submit)="saveUser()">
     <header>Cadastre-se</header>
     <alert *ngIf="message">
         {{message}}
@@ -40,7 +40,7 @@
             <section class="col col-md-12">
                 <label class="textarea">
                     <i class="icon-prepend fa fa-institution"></i>
-                    <textarea rows="3" name="formacao" [(ngModel)]="user.formacao" placeholder="Fromação"></textarea>
+                    <textarea rows="3" name="formacao" [(ngModel)]="user.formacao" placeholder="Formação"></textarea>
                 </label>
             </section>
         </div>
@@ -49,6 +49,14 @@
                 <label class="textarea">
                     <i class="icon-prepend fa fa-gear"></i>
                     <textarea rows="3" name="habilidades" [(ngModel)]="user.habilidades" placeholder="Habilidades"></textarea>
+                </label>
+            </section>
+        </div>
+        <div class="row">
+            <section class="col col-md-12">
+                <label class="input">
+                    <i class="icon-append fa fa-hotel"></i>
+                    <places (emitirLatLong)="setMap($event)"></places>
                 </label>
             </section>
         </div>

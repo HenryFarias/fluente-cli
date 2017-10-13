@@ -1,3 +1,5 @@
+import { MapsService } from './../services/maps.service';
+import { Idioma } from './../models/idioma';
 import { User } from './../models/user';
 import { Evento } from './../models/evento';
 import { Nivel } from './../models/nivel';
@@ -13,6 +15,7 @@ declare let google: any;
     selector: 'form-evento',
     providers: [
         EventoService,
+        MapsService
     ]
 })
 export class EventoComponent {
@@ -21,6 +24,7 @@ export class EventoComponent {
     public niveis: Nivel;
     public evento: Evento;
     public professores: User;
+    public idiomas: Idioma;
 
     @Input()
     public openModal: boolean = false;
@@ -30,6 +34,7 @@ export class EventoComponent {
 
     constructor (
         private httpService: AppHttpService,
+        private mapsService: MapsService,
     ) {}
 
     // Cada mudança no componente passa por esse evento
@@ -39,15 +44,10 @@ export class EventoComponent {
             this.httpService.builder('user').create().then((res) => {
                 this.niveis = res.data.niveis;
                 this.professores = res.data.professores;
+                this.idiomas = res.data.idiomas;
             });
 
             this.modal.open();
-                
-            var input = document.getElementById('local');
-            console.log(input);
-            var autocomplete = new google.maps.places.Autocomplete(input);
-            
-            // google.maps.event.addDomListener(window, 'load', initialize);
         }
     }
 
@@ -63,5 +63,11 @@ export class EventoComponent {
             this.message = error.json().error;
             console.log(erro.error);
         });
+    }
+
+    public setMap(evento) {
+        this.evento.endereco.latitude = evento.geometry.location.lat();
+        this.evento.endereco.longitude = evento.geometry.location.lng();
+        this.evento.endereco.cidade.name = this.mapsService.getCidade(evento);
     }
 }

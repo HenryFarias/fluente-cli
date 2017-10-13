@@ -38,7 +38,7 @@ export class MapaComponent implements OnInit {
         this.mapsAPILoader.load().then(() => {
             this.map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 4,
-                center: new google.maps.LatLng(evento[0], evento[1])
+                center: new google.maps.LatLng(evento.geometry.location.lat(), evento.geometry.location.lng())
             });
         });
     }

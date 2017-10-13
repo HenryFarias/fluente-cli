@@ -17,8 +17,8 @@ export class ModalComponent implements OnInit {
 
     open() {
         $(this.modal.nativeElement).modal({
-            keyboard: false,
-            backdrop: "static"
+            // keyboard: false,
+            // backdrop: "static"
         });
     }
 

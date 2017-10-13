@@ -1,3 +1,4 @@
+import { MapsModule } from './../maps/maps.module';
 import { ModalModule } from './../util/modal/modal.module';
 import { AlertModule } from './../util/alert/alert.module';
 import { NgModule } from '@angular/core';
@@ -24,6 +25,7 @@ const appRoutes: Routes = [
         LayoutModule,
         AlertModule,
         ModalModule,
+        MapsModule,
     ],
     declarations: [
         EventoComponent,
