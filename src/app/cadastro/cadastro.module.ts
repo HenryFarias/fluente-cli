@@ -1,3 +1,4 @@
+import { MapsModule } from './../maps/maps.module';
 import { ModalModule } from './../util/modal/modal.module';
 import { FormCadastroComponent } from './formCadastro.component';
 import { NgModule } from '@angular/core';
@@ -27,6 +28,7 @@ const appRoutes: Routes = [
         LoginModule,
         AlertModule,
         ModalModule,
+        MapsModule,
     ],
     declarations: [
         CadastroComponent,

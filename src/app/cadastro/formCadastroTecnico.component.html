@@ -32,39 +32,7 @@
                         <section class="col col-md-12">
                             <label class="input">
                                 <i class="icon-append fa fa-hotel"></i>
-                                <input required name="cep" [(ngModel)]="user.endereco.cep" (blur)="viaCep()" type="text" placeholder="CEP">
-                            </label>
-                        </section>
-                    </div>
-                    <div class="row">
-                        <section class="col col-md-6">
-                            <label class="input">
-                                <i class="icon-append fa fa-hotel"></i>
-                                <input required name="rua" [(ngModel)]="user.endereco.rua" type="text" placeholder="Rua*">
-                                <b class="tooltip tooltip-bottom-right">Obrigatório!</b>
-                            </label>
-                        </section>
-                        <section class="col col-md-6">
-                            <label class="input">
-                                <i class="icon-append fa fa-hotel"></i>
-                                <input required name="bairro" [(ngModel)]="user.endereco.bairro" type="text" placeholder="Bairro*">
-                                <b class="tooltip tooltip-bottom-right">Obrigatório!</b>
-                            </label>
-                        </section>
-                    </div>
-                    <div class="row">
-                        <section class="col col-md-6">
-                            <label class="input">
-                                <i class="icon-append fa fa-hotel"></i>
-                                <input required name="cidade" [(ngModel)]="user.endereco.cidade.name" type="text" placeholder="Cidade*">
-                                <b class="tooltip tooltip-bottom-right">Obrigatório!</b>
-                            </label>
-                        </section>
-                        <section class="col col-md-6">
-                            <label class="input">
-                                <i class="icon-append fa fa-hotel"></i>
-                                <input required name="estado" [(ngModel)]="user.endereco.cidade.estado.name" type="text" placeholder="Estado*">
-                                <b class="tooltip tooltip-bottom-right">Obrigatório!</b>
+                                <places [teste]="placesCadastro" (emitirLatLong)="setMap($event)"></places>
                             </label>
                         </section>
                     </div>

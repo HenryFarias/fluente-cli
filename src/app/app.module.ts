@@ -10,7 +10,7 @@ import { CadastroModule } from './cadastro/cadastro.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { EventoModule } from './evento/evento.module';
 
-// Rota de redirecionamento apenas. Redirecionando para a rota de produtos
+// Rota de redirecionamento apenas. Redirecionando para a rota de login
 const appRoutes: Routes = [
     {path: '', redirectTo: '/login', pathMatch: 'full'}
 ];

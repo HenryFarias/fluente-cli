@@ -67,18 +67,9 @@ export class FormCadastroTecnicoComponent {
         });
     }
 
-    public viaCep() {
-        if (this.user.endereco.cep) {
-            this.cadastroService.viaCep(this.user.endereco.cep).then((res) => {
-                this.user.endereco.rua = res.logradouro;
-                this.user.endereco.cidade.name = res.localidade;
-                this.user.endereco.bairro = res.bairro;
-                this.user.endereco.cidade.estado.name = res.uf;
-            }).catch(error => {
-                var erro = error.json();
-                this.message = error.json().error;
-                console.log(error);
-            })
-        }
+    public setMap(evento) {
+        console.log("setMap");
+        this.user.endereco.latitude = evento[0];
+        this.user.endereco.longitude = evento[1];
     }
 }
