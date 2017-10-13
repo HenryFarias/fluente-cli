@@ -1,0 +1,1 @@
+jQuery('.datepicker').daterangepicker({ singleDatePicker: true }, function(start, end, label) {});
