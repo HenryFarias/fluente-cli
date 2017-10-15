@@ -11,7 +11,7 @@ export class Evento {
     public name: string;
     public local: string;
     public publico_ou_privado: string;
-    public data: Date;
+    public data: any;
     public duracao: string;
     public descricao: string;
     public professor: User;

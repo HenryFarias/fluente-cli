@@ -55,12 +55,12 @@
                         <section class="col col-md-6">
                             <label class="input">
                                 <i class="icon-append fa fa-calendar"></i>
-                                <input class="datepicker active" required name="data" [(ngModel)]="evento.data" type="text" placeholder="Data">
+                                <my-date-picker name="data" [options]="myDatePickerOptions" [(ngModel)]="evento.data" required></my-date-picker>
                             </label>
                         </section>
                         <section class="col col-md-6">
                             <label class="input">
-                                <i class="icon-append fa-calendar"></i>
+                                <i class="icon-append fa fa-calendar"></i>
                                 <input required name="duracao" [(ngModel)]="evento.duracao" type="text" placeholder="Duração">
                             </label>
                         </section>

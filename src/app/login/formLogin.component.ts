@@ -27,7 +27,8 @@ export class FormLoginComponent {
     login() {
         this.message = null;
         
-        this.loginService.autenticate(this.user).then(() => {
+        this.loginService.autenticate(this.user).then((res) => {
+            this.user = res.data;
             this.user.logado = true;
             this.sharedUser.setUser(this.user);
             sessionStorage.setItem("user", JSON.stringify(this.user));

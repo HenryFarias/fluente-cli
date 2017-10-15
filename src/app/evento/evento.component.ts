@@ -7,6 +7,7 @@ import { ModalComponent } from './../util/modal/modal.component';
 import { EventoService } from './../services/evento.service';
 import { Component, Input, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { AppHttpService } from '../app/app-http.service';
+import {IMyDpOptions} from 'mydatepicker';
 
 declare let google: any;
 
@@ -56,15 +57,9 @@ export class EventoComponent {
     }
 
     public saveEvento() {
-        this.evento.dono = JSON.parse(sessionStorage.getItem("user"));
 
-        this.httpService.builder('evento').save(this.evento).then(() => {
-            this.modal.close();
-        }).catch(error => {
-            var erro = error.json();
-            this.message = error.json().error;
-            console.log(erro.error);
-        });
+        console.log(this.evento);
+        console.log(JSON.stringify(this.evento));
     }
 
     public setMap(evento) {
@@ -72,4 +67,12 @@ export class EventoComponent {
         this.evento.endereco.longitude = evento.geometry.location.lng();
         this.evento.endereco.cidade.name = this.mapsService.getCidade(evento);
     }
+
+    // https://github.com/kekeh/mydatepicker
+    public myDatePickerOptions: IMyDpOptions = {
+        dateFormat: 'dd.mm.yyyy',
+        dayLabels: {su: 'Dom', mo: 'Seg', tu: 'Ter', we: 'Qua', th: 'Qui', fr: 'Sex', sa: 'Sáb'},
+        monthLabels: { 1: 'Jan', 2: 'Fev', 3: 'Mar', 4: 'Abr', 5: 'Mai', 6: 'Jun', 7: 'Jul', 8: 'Ago', 9: 'Set', 10: 'Out', 11: 'Nov', 12: 'Dez' },
+        todayBtnTxt: 'Hoje',
+    };
 }

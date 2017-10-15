@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { AppHttpService } from '../app/app-http.service';
 import { LayoutModule } from '../layout/layout.module';
 import { EventoComponent } from './evento.component';
+import { MyDatePickerModule } from 'mydatepicker';
 
 
 const appRoutes: Routes = [
@@ -26,6 +27,7 @@ const appRoutes: Routes = [
         AlertModule,
         ModalModule,
         MapsModule,
+        MyDatePickerModule,
     ],
     declarations: [
         EventoComponent,
