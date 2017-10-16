@@ -27,8 +27,8 @@ export class EventoComponent {
     public professores: User;
     public idiomas: Idioma;
 
-    @Input()
-    public openModal: boolean = false;
+    
+    private _openModal: boolean = false;
 
     @ViewChild(ModalComponent)
     public modal: ModalComponent;
@@ -40,26 +40,35 @@ export class EventoComponent {
 
     // Cada mudança no componente passa por esse evento
     // Se o dashboard mandar abrir a modal enviando true pelo input, o evento inicia.
-    ngOnChanges() {
-        if (this.openModal) {
-            this.httpService.builder('user').create().then((res) => {
-                this.niveis = res.data.niveis;
-                this.professores = res.data.professores;
-                this.idiomas = res.data.idiomas;
-            });
+    // ngOnChanges() {
+    //     if (this.openModal) {
+    //         this.httpService.builder('user').create().then((res) => {
+    //             this.niveis = res.data.niveis;
+    //             this.professores = res.data.professores;
+    //             this.idiomas = res.data.idiomas;
+    //         });
 
-            this.modal.open();
-        }
-    }
+    //         this.modal.open();
+    //     }
+    // }
 
     ngOnInit() {
         this.evento = new Evento();
+        this.evento.dono = JSON.parse(sessionStorage.getItem("user"));
     }
 
     public saveEvento() {
-
-        console.log(this.evento);
-        console.log(JSON.stringify(this.evento));
+        // console.log(this.evento);
+        // console.log(JSON.stringify(this.evento));
+        this.evento.data = this.evento.data.jsdate;
+        
+        this.httpService.builder('evento').save(this.evento).then(() => {
+            this.modal.close();
+        }).catch(error => {
+            var erro = error.json();
+            this.message = error.json().error;
+            console.log(erro.error);
+        });
     }
 
     public setMap(evento) {
@@ -75,4 +84,17 @@ export class EventoComponent {
         monthLabels: { 1: 'Jan', 2: 'Fev', 3: 'Mar', 4: 'Abr', 5: 'Mai', 6: 'Jun', 7: 'Jul', 8: 'Ago', 9: 'Set', 10: 'Out', 11: 'Nov', 12: 'Dez' },
         todayBtnTxt: 'Hoje',
     };
+
+    @Input()
+    set openModal(openModal: boolean) {
+        if (openModal) {
+            this.httpService.builder('user').create().then((res) => {
+                this.niveis = res.data.niveis;
+                this.professores = res.data.professores;
+                this.idiomas = res.data.idiomas;
+            });
+
+            this.modal.open();
+        }
+    }
 }

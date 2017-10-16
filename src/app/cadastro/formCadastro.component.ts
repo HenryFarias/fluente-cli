@@ -46,7 +46,8 @@ export class FormCadastroComponent {
     }
 
     public saveUser() {
-        this.httpService.builder('user').save(this.user).then(() => {
+        this.httpService.builder('user').save(this.user).then((res) => {
+            this.user = res.data;
             this.user.logado = true;
             sessionStorage.setItem("user", JSON.stringify(this.user));
             this.sharedUser.setUser(this.user);

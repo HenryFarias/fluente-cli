@@ -1,2 +1,20 @@
+<alert *ngIf="message">
+    {{message}}
+</alert>
 <places (emitirLatLong)="setMap($event)"></places>
-<div id="map"></div>
+<agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+    <agm-marker *ngFor="let evento of eventos" [latitude]="evento.endereco.latitude" [longitude]="evento.endereco.longitude" [label]="'E'">
+        <agm-info-window>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Nome: </label>{{evento.name}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Descrição: </label>{{evento.descricao}}
+                    </div>
+                </div>
+        </agm-info-window>
+    </agm-marker>
+</agm-map>
