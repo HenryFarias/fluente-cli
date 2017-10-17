@@ -1,3 +1,4 @@
+import { EventoService } from './../services/evento.service';
 import { Evento } from './../models/evento';
 import { AppHttpService } from './../app/app-http.service';
 import { Component, Input, OnInit } from '@angular/core';
@@ -10,6 +11,9 @@ import { AgmCoreModule, MapsAPILoader } from '@agm/core';
     templateUrl: './mapa.component.html',
     selector: 'mapa',
     styleUrls: ['./mapa.component.css'],
+    providers: [ 
+        EventoService,
+    ]
 })
 export class MapaComponent implements OnInit {
 
@@ -28,11 +32,15 @@ export class MapaComponent implements OnInit {
 
     constructor(
         private mapsAPILoader: MapsAPILoader,
-        private httpService: AppHttpService,
+        private eventoService: EventoService,
     ) {}
 
     ngOnInit() {
-        this.httpService.builder('evento').list().then((res) => {
+        this.loadEventos();
+    }
+
+    private loadEventos() {
+        this.eventoService.getAllForMaps(JSON.parse(sessionStorage.getItem("user"))).then((res) => {
             this.eventos = res.data;
             this.eventos = this.castToNumber(this.eventos);
         }).catch(error => {
@@ -54,5 +62,6 @@ export class MapaComponent implements OnInit {
     public setMap(evento) {
         this.latitude = evento.geometry.location.lat();
         this.longitude = evento.geometry.location.lng();
+        this.loadEventos();
     }
 }

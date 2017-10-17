@@ -1,3 +1,4 @@
+import { ListaComponent } from './lista.component';
 import { MapsModule } from './../maps/maps.module';
 import { ModalModule } from './../util/modal/modal.module';
 import { AlertModule } from './../util/alert/alert.module';
@@ -14,7 +15,7 @@ import { MyDatePickerModule } from 'mydatepicker';
 
 const appRoutes: Routes = [
     {path: 'evento', children:[
-        { path: '', component: EventoComponent}
+        { path: 'list', component: ListaComponent}
     ]}
 ];
 
@@ -31,6 +32,7 @@ const appRoutes: Routes = [
     ],
     declarations: [
         EventoComponent,
+        ListaComponent
     ],
     providers: [AppHttpService],
     exports: [EventoComponent]

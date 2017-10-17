@@ -1,13 +1,11 @@
-<modal>
-    <div class="modal-content">   
-        <div class="modal-header">
-            <h4 class="modal-title">Evento</h4>
-        </div>
-
-        <div class="modal-body">
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
             <alert *ngIf="message">
                 {{message}}
             </alert>
+
+            <h1 class="text-center">CADASTRO EVENTO</h1>
 
             <form action="" class="sky-form" (submit)="saveEvento()">
                 <fieldset>
@@ -87,7 +85,6 @@
                     <button type="submit" class="button">Finalizar</button>
                 </footer>
             </form>
-
         </div>
     </div>
-</modal>
+</div>

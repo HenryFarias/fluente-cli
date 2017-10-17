@@ -36,8 +36,11 @@ export class HeaderComponent {
     public sair() {
         this.user.logado = false;
         sessionStorage.setItem("user", JSON.stringify(this.user));
-        console.log("init", this.user);
         this.router.navigate(['/login']);
+    }
+
+    public eventos() {
+        this.router.navigate(['/evento/list']);
     }
 
     public setUser(user: User) {

@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>MEUS EVENTOS</h1>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th><i class="fa fa-building pull-right hidden-xs"></i>Nome do Evento</th>
+                            <th><i class="fa fa-calendar pull-right hidden-xs"></i>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let evento of eventos">
+                            <td>{{evento.name}}</td>
+                            <td><button type="button" class="btn btn-primary">Editar</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

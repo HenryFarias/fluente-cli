@@ -1,15 +1,14 @@
-<header class="background-color-header" id="topBar">
+<!-- <header class="background-color-header" id="topBar">
     <div class="container">
         <div class="row">
             <div class="pull-right fsize13 margin-top10 hide_mobile">
-                <div class="block text-right"><!-- social -->
+                <div class="block text-right">
                     <a href="#" class="social fa fa-facebook"></a>
                     <a href="#" class="social fa fa-twitter"></a>
                     <a href="#" class="social fa fa-linkedin"></a>
-                </div><!-- /social -->
+                </div>
             </div>
             
-            <!-- Logo -->
             <a class="logo" (click)="backToHome()">
                 <img src="../../assets/epona/images/logo.png" height="50" alt="" />
             </a>
@@ -19,7 +18,33 @@
                 <img src="../../assets/images/sair.png" height="50" alt="" />
             </a>
         </div>
-    </div><!-- /.container -->
+    </div>
 
     <hr />
+</header> -->
+
+<header id="topBar">
+    <div class="container">
+
+        <div class="pull-left fsize13 hide_mobile">
+
+            <div class="block text-right"><!-- social -->
+                <a class="logo" (click)="backToHome()">
+                    <img src="../../assets/epona/images/logo.png" height="50" alt="" />
+                </a>
+            </div><!-- /social -->
+
+        </div>
+
+        <div *ngIf="user.logado" id="barMain">
+            <nav class="nav-second">
+                <ul class="nav nav-pills nav-second">
+                    <li><a (click)="eventos()"><i class="fa fa-angle-right"></i> Eventos</a></li>
+                    <li><a (click)="sair()"><i class="fa fa-angle-right"></i> Sair</a></li>
+                </ul>
+            </nav>
+        </div>
+
+    </div><!-- /.container -->
+    <div class="divider half-margins"><!-- divider 30px --></div>
 </header>
