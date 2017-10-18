@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MapsService } from './../services/maps.service';
 import { Idioma } from './../models/idioma';
 import { User } from './../models/user';
@@ -25,36 +25,46 @@ export class EventoComponent {
     public evento: Evento;
     public professores: User;
     public idiomas: Idioma;
+    public routeId: number;
 
     constructor (
         private httpService: AppHttpService,
         private mapsService: MapsService,
         private router: Router,
+        private activatedRoute: ActivatedRoute,
     ) {}
 
-    // Cada mudança no componente passa por esse evento
-    // Se o dashboard mandar abrir a modal enviando true pelo input, o evento inicia.
-    // ngOnChanges() {
-    //     if (this.openModal) {
-    //         this.httpService.builder('user').create().then((res) => {
-    //             this.niveis = res.data.niveis;
-    //             this.professores = res.data.professores;
-    //             this.idiomas = res.data.idiomas;
-    //         });
-
-    //         this.modal.open();
-    //     }
-    // }
-
     ngOnInit() {
+        this.activatedRoute.params.subscribe(params => {
+            this.routeId = params['id'];
+        });
+
         this.httpService.builder('user').create().then((res) => {
             this.niveis = res.data.niveis;
             this.professores = res.data.professores;
             this.idiomas = res.data.idiomas;
+        }).catch(error => {
+            var erro = error.json();
+            this.message = error.json().error;
+            console.log(erro.error);
         });
 
-        this.evento = new Evento();
-        this.evento.dono = JSON.parse(sessionStorage.getItem("user"));
+        if (this.routeId) {
+            this.getEvento();
+        } else {
+            this.evento = new Evento();
+            this.evento.dono = JSON.parse(sessionStorage.getItem("user"));
+        }
+    }
+
+    public getEvento() {
+        this.httpService.builder('evento').view(this.routeId).then((res) => {
+            this.evento = res.data;
+        }).catch(error => {
+            var erro = error.json();
+            this.message = error.json().error;
+            console.log(erro.error);
+        });
     }
 
     public saveEvento() {
@@ -69,10 +79,25 @@ export class EventoComponent {
         });
     }
 
+    public updateEvento() {
+        if (this.evento.data.jsdate) {
+            this.evento.data = this.evento.data.jsdate;
+        }
+        
+        this.httpService.builder('evento').update(this.evento.id, this.evento).then((res) => {
+            this.router.navigate(['/evento/list']);
+        }).catch(error => {
+            var erro = error.json();
+            this.message = error.json().error;
+            console.log(erro.error);
+        });
+    }
+
     public setMap(evento) {
         this.evento.endereco.latitude = evento.geometry.location.lat();
         this.evento.endereco.longitude = evento.geometry.location.lng();
         this.evento.endereco.cidade.name = this.mapsService.getCidade(evento);
+        this.evento.endereco.name = evento.formatted_address;
     }
 
     // https://github.com/kekeh/mydatepicker

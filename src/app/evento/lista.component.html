@@ -1,7 +1,11 @@
-<div class="container">
+<alert *ngIf="message">
+    {{message}}
+</alert>
+<h5 *ngIf="eventos.length < 1">Nenhum evento vinculado a você!</h5>
+<div *ngIf="eventos.length > 0" class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1>MEUS EVENTOS</h1>
+            <h1 class="text-center">MEUS EVENTOS</h1>
             <div class="table-responsive">
                 <table class="table table-bordered table-striped table-hover">
                     <thead>
@@ -13,7 +17,10 @@
                     <tbody>
                         <tr *ngFor="let evento of eventos">
                             <td>{{evento.name}}</td>
-                            <td><button type="button" class="btn btn-primary">Editar</button></td>
+                            <td>
+                                <button [disabled]="!evento.dono" (click)="edit(evento)" type="button" class="btn btn-info">Editar</button>
+                                <button [disabled]="!evento.dono" (click)="setEvento(evento)" type="button" class="btn btn-danger">Excluir</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -21,3 +28,20 @@
         </div>
     </div>
 </div>
+<modal>
+    <div class="modal-header"><!-- modal header -->
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myModalLabel">Exclusão</h4>
+    </div><!-- /modal header -->
+
+    <!-- modal body -->
+    <div class="modal-body">
+        Deseja realmente excluir este evento ?
+    </div>
+    <!-- /modal body -->
+
+    <div class="modal-footer"><!-- modal footer -->
+        <button class="btn btn-default" data-dismiss="modal">Não</button> 
+        <button class="btn btn-primary" (click)="delete()">Sim</button>
+    </div><!-- /modal footer -->
+</modal>

@@ -15,7 +15,9 @@ import { MyDatePickerModule } from 'mydatepicker';
 
 const appRoutes: Routes = [
     {path: 'evento', children:[
-        { path: 'list', component: ListaComponent}
+        { path: '', component: EventoComponent},
+        { path: 'list', component: ListaComponent},
+        { path: 'edit/:id', component: EventoComponent},
     ]}
 ];
 

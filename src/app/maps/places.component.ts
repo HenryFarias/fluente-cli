@@ -18,6 +18,9 @@ export class PlacesComponent implements OnInit {
     @ViewChild("search")
     public searchElementRef: ElementRef;
 
+    @Input()
+    public value: string = "";
+
     constructor(
         private mapsAPILoader: MapsAPILoader,
         private ngZone: NgZone

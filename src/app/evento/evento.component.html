@@ -7,7 +7,7 @@
 
             <h1 class="text-center">CADASTRO EVENTO</h1>
 
-            <form action="" class="sky-form" (submit)="saveEvento()">
+            <form action="" class="sky-form">
                 <fieldset>
                     <div class="row">
                         <section class="col col-md-6">
@@ -19,7 +19,8 @@
                         <section class="col col-md-6">
                             <label class="input">
                                 <i class="icon-append fa fa-hotel"></i>
-                                <places (emitirLatLong)="setMap($event)"></places>
+                                <places *ngIf="!routeId" (emitirLatLong)="setMap($event)"></places>
+                                <places *ngIf="routeId" [value]="evento.endereco.name" (emitirLatLong)="setMap($event)"></places>
                             </label>
                         </section>
                     </div>
@@ -82,7 +83,8 @@
                     </div>
                 </fieldset>
                 <footer>
-                    <button type="submit" class="button">Finalizar</button>
+                    <button *ngIf="!routeId" type="button" (click)="saveEvento()" class="button">Salvar</button>
+                    <button *ngIf="routeId" type="button" (click)="updateEvento()" class="button">Atualizar</button>
                 </footer>
             </form>
         </div>
