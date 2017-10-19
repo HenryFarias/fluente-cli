@@ -6,11 +6,12 @@ import { NgModule } from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-
+import { Ng2CompleterModule } from "ng2-completer";
 import { AppHttpService } from '../app/app-http.service';
 import { LayoutModule } from '../layout/layout.module';
 import { EventoComponent } from './evento.component';
 import { MyDatePickerModule } from 'mydatepicker';
+import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 
 
 const appRoutes: Routes = [
@@ -31,6 +32,8 @@ const appRoutes: Routes = [
         ModalModule,
         MapsModule,
         MyDatePickerModule,
+        Ng2CompleterModule,
+        MultiselectDropdownModule,
     ],
     declarations: [
         EventoComponent,

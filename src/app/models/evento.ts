@@ -16,6 +16,7 @@ export class Evento {
     public descricao: string;
     public professor: User;
     public dono: User;
+    public users : any[] = [];
     public assunto: Assunto;
     public nivel: Nivel;
     public idioma: Idioma;

@@ -63,5 +63,6 @@ export class FormCadastroComponent {
         this.user.endereco.latitude = evento.geometry.location.lat();
         this.user.endereco.longitude = evento.geometry.location.lng();
         this.user.endereco.cidade.name = this.mapsService.getCidade(evento);
+        this.user.endereco.name = evento.formatted_address;
     }
 }

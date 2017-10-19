@@ -5,7 +5,8 @@
                 {{message}}
             </alert>
 
-            <h1 class="text-center">CADASTRO EVENTO</h1>
+            <h1 *ngIf="!routeId" class="text-center">CADASTRO EVENTO</h1>
+            <h1 *ngIf="routeId" class="text-center">EDITAR EVENTO</h1>
 
             <form action="" class="sky-form">
                 <fieldset>
@@ -51,17 +52,20 @@
                         </section>
                     </div>
                     <div class="row">
-                        <section class="col col-md-6">
+                        <section class="col col-md-4">
                             <label class="input">
                                 <i class="icon-append fa fa-calendar"></i>
                                 <my-date-picker name="data" [options]="myDatePickerOptions" [(ngModel)]="evento.data" required></my-date-picker>
                             </label>
                         </section>
-                        <section class="col col-md-6">
+                        <section class="col col-md-4">
                             <label class="input">
                                 <i class="icon-append fa fa-calendar"></i>
                                 <input required name="duracao" [(ngModel)]="evento.duracao" type="text" placeholder="Duração">
                             </label>
+                        </section>
+                        <section class="col col-md-4">
+                            <ss-multiselect-dropdown [options]="users" (ngModelChange)="onChange($event)" name="user" [(ngModel)]="user" [settings]="comboMultipleSettings" [texts]="comboMultipleTexts"></ss-multiselect-dropdown>
                         </section>
                     </div>
                     <div class="row">
