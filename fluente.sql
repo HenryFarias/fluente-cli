@@ -13,12 +13,10 @@
 
 
 -- Copiando estrutura do banco de dados para fluente
-DROP DATABASE IF EXISTS `fluente`;
 CREATE DATABASE IF NOT EXISTS `fluente` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `fluente`;
 
 -- Copiando estrutura para tabela fluente.assuntos
-DROP TABLE IF EXISTS `assuntos`;
 CREATE TABLE IF NOT EXISTS `assuntos` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -34,7 +32,6 @@ DELETE FROM `assuntos`;
 /*!40000 ALTER TABLE `assuntos` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela fluente.cidades
-DROP TABLE IF EXISTS `cidades`;
 CREATE TABLE IF NOT EXISTS `cidades` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -47,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `cidades` (
   CONSTRAINT `cidades_estado_id_foreign` FOREIGN KEY (`estado_id`) REFERENCES `estados` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9715 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Copiando dados para a tabela fluente.cidades: ~9.033 rows (aproximadamente)
+-- Copiando dados para a tabela fluente.cidades: ~9.714 rows (aproximadamente)
 DELETE FROM `cidades`;
 /*!40000 ALTER TABLE `cidades` DISABLE KEYS */;
 INSERT INTO `cidades` (`id`, `name`, `estado_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
@@ -9768,7 +9765,6 @@ INSERT INTO `cidades` (`id`, `name`, `estado_id`, `created_at`, `updated_at`, `d
 /*!40000 ALTER TABLE `cidades` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela fluente.comentarios
-DROP TABLE IF EXISTS `comentarios`;
 CREATE TABLE IF NOT EXISTS `comentarios` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -9790,35 +9786,44 @@ DELETE FROM `comentarios`;
 /*!40000 ALTER TABLE `comentarios` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela fluente.enderecos
-DROP TABLE IF EXISTS `enderecos`;
 CREATE TABLE IF NOT EXISTS `enderecos` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `cidade_id` int(10) unsigned NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `latitude` bigint(255) DEFAULT NULL,
-  `longitude` bigint(255) DEFAULT NULL,
+  `name` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `latitude` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
+  `longitude` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_endereco_cidades` (`cidade_id`),
   CONSTRAINT `FK_endereco_cidades` FOREIGN KEY (`cidade_id`) REFERENCES `cidades` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT;
 
--- Copiando dados para a tabela fluente.enderecos: ~6 rows (aproximadamente)
+-- Copiando dados para a tabela fluente.enderecos: ~17 rows (aproximadamente)
 DELETE FROM `enderecos`;
 /*!40000 ALTER TABLE `enderecos` DISABLE KEYS */;
-INSERT INTO `enderecos` (`id`, `cidade_id`, `created_at`, `updated_at`, `deleted_at`, `latitude`, `longitude`) VALUES
-	(1, 7777, '2017-10-13 15:42:35', '2017-10-13 15:42:35', NULL, -30, -51),
-	(2, 7777, '2017-10-13 15:45:03', '2017-10-13 15:45:03', NULL, -30, -51),
-	(3, 7777, '2017-10-13 15:45:25', '2017-10-13 15:45:25', NULL, -30, -51),
-	(4, 7777, '2017-10-13 15:46:47', '2017-10-13 15:46:47', NULL, -30, -51),
-	(5, 7777, '2017-10-13 15:49:24', '2017-10-13 15:49:24', NULL, -30, -51),
-	(6, 7777, '2017-10-13 15:49:41', '2017-10-13 15:49:41', NULL, -30, -51),
-	(7, 7777, '2017-10-13 19:31:22', '2017-10-13 19:31:22', NULL, -30, -51);
+INSERT INTO `enderecos` (`id`, `cidade_id`, `created_at`, `updated_at`, `deleted_at`, `name`, `latitude`, `longitude`) VALUES
+	(36, 7777, '2017-10-17 23:43:12', '2017-10-17 23:43:12', NULL, 'legado', '-30.0084615', '-51.17949399999998'),
+	(37, 7777, '2017-10-17 23:43:50', '2017-10-17 23:43:50', NULL, 'legado', '-30.0084615', '-51.17949399999998'),
+	(48, 7777, '2017-10-19 02:06:29', '2017-10-19 02:06:29', NULL, NULL, '-30.0500689', '-51.228118300000006'),
+	(49, 7777, '2017-10-19 02:08:14', '2017-10-19 02:08:14', NULL, 'Av. Praia de Belas - Cidade Baixa, Porto Alegre - RS, Brasil', '-30.0500689', '-51.228118300000006'),
+	(51, 7777, '2017-10-20 01:34:09', '2017-10-20 01:34:09', NULL, 'Av. Praia de Belas - Cidade Baixa, Porto Alegre - RS, Brasil', '-30.0500689', '-51.228118300000006'),
+	(52, 7777, '2017-10-20 02:29:53', '2017-10-20 02:29:53', NULL, 'Av. Praia de Belas - Cidade Baixa, Porto Alegre - RS, Brasil', '-30.0500689', '-51.228118300000006'),
+	(53, 7777, '2017-10-20 02:30:08', '2017-10-20 02:30:08', NULL, 'Av. Praia de Belas - Cidade Baixa, Porto Alegre - RS, Brasil', '-30.0500689', '-51.228118300000006'),
+	(54, 7777, '2017-10-20 02:31:45', '2017-10-20 02:31:45', NULL, 'Av. Praia de Belas - Cidade Baixa, Porto Alegre - RS, Brasil', '-30.0500689', '-51.228118300000006'),
+	(55, 7777, '2017-10-20 02:52:20', '2017-10-20 02:52:20', NULL, 'Av. Praia de Belas - Cidade Baixa, Porto Alegre - RS, Brasil', '-30.0500689', '-51.228118300000006'),
+	(56, 7777, '2017-10-20 03:30:54', '2017-10-20 03:30:54', NULL, 'Av. Praia de Belas - Cidade Baixa, Porto Alegre - RS, Brasil', '-30.0500689', '-51.228118300000006'),
+	(57, 7777, '2017-10-20 03:33:45', '2017-10-20 03:33:45', NULL, 'Av. Praia de Belas - Cidade Baixa, Porto Alegre - RS, Brasil', '-30.0500689', '-51.228118300000006'),
+	(58, 7777, '2017-10-20 03:34:51', '2017-10-20 03:34:51', NULL, 'Av. Praia de Belas - Cidade Baixa, Porto Alegre - RS, Brasil', '-30.0500689', '-51.228118300000006'),
+	(59, 7777, '2017-10-20 04:06:54', '2017-10-20 04:06:54', NULL, 'Av. 21 de Abril - Sarandi, Porto Alegre - RS, Brasil', '-29.98571209999999', '-51.12954070000001'),
+	(60, 7777, '2017-10-20 04:10:56', '2017-10-20 04:10:56', NULL, 'Av. Praia de Belas - Cidade Baixa, Porto Alegre - RS, Brasil', '-30.0500689', '-51.228118300000006'),
+	(61, 7777, '2017-10-20 04:13:23', '2017-10-20 04:13:23', NULL, 'Av. Praia de Belas - Cidade Baixa, Porto Alegre - RS, Brasil', '-30.0500689', '-51.228118300000006'),
+	(62, 7777, '2017-10-20 04:13:46', '2017-10-20 04:13:46', NULL, 'Av. Praia de Belas - Cidade Baixa, Porto Alegre - RS, Brasil', '-30.0500689', '-51.228118300000006'),
+	(63, 7777, '2017-10-20 04:25:04', '2017-10-20 04:25:04', NULL, 'Av. Praia de Belas - Cidade Baixa, Porto Alegre - RS, Brasil', '-30.0500689', '-51.228118300000006');
 /*!40000 ALTER TABLE `enderecos` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela fluente.estados
-DROP TABLE IF EXISTS `estados`;
 CREATE TABLE IF NOT EXISTS `estados` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -9865,13 +9870,14 @@ INSERT INTO `estados` (`id`, `name`, `pais_id`, `created_at`, `updated_at`, `del
 /*!40000 ALTER TABLE `estados` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela fluente.eventos
-DROP TABLE IF EXISTS `eventos`;
 CREATE TABLE IF NOT EXISTS `eventos` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `dono_id` int(10) unsigned NOT NULL COMMENT 'chave estrangeira para referenciar ao dono do evento',
   `publico_ou_privado` enum('publico','privado') COLLATE utf8_unicode_ci NOT NULL,
-  `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `data` date DEFAULT NULL,
   `duracao` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `professor_id` int(10) unsigned DEFAULT NULL,
   `descricao` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `nivel_id` int(10) unsigned NOT NULL,
   `endereco_id` int(10) unsigned NOT NULL,
@@ -9885,19 +9891,24 @@ CREATE TABLE IF NOT EXISTS `eventos` (
   KEY `FK_eventos_niveis` (`nivel_id`),
   KEY `FK_eventos_idiomas` (`idioma_id`),
   KEY `FK_eventos_enderecos` (`endereco_id`),
+  KEY `FK_eventos_users` (`dono_id`),
+  KEY `FK_eventos_users_2` (`professor_id`),
   CONSTRAINT `FK_eventos_enderecos` FOREIGN KEY (`endereco_id`) REFERENCES `enderecos` (`id`),
   CONSTRAINT `FK_eventos_idiomas` FOREIGN KEY (`idioma_id`) REFERENCES `idiomas` (`id`),
   CONSTRAINT `FK_eventos_niveis` FOREIGN KEY (`nivel_id`) REFERENCES `niveis` (`id`),
+  CONSTRAINT `FK_eventos_users` FOREIGN KEY (`dono_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `FK_eventos_users_2` FOREIGN KEY (`professor_id`) REFERENCES `users` (`id`),
   CONSTRAINT `eventos_assunto_id_foreign` FOREIGN KEY (`assunto_id`) REFERENCES `assuntos` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Copiando dados para a tabela fluente.eventos: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela fluente.eventos: ~1 rows (aproximadamente)
 DELETE FROM `eventos`;
 /*!40000 ALTER TABLE `eventos` DISABLE KEYS */;
+INSERT INTO `eventos` (`id`, `name`, `dono_id`, `publico_ou_privado`, `data`, `duracao`, `professor_id`, `descricao`, `nivel_id`, `endereco_id`, `assunto_id`, `created_at`, `updated_at`, `deleted_at`, `idioma_id`) VALUES
+	(31, 'Inglês no praia', 9, 'publico', '2017-04-13', '2 horas', NULL, 'ewqewqewq', 1, 63, NULL, '2017-10-20 04:25:04', '2017-10-20 04:59:45', NULL, 1);
 /*!40000 ALTER TABLE `eventos` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela fluente.idiomas
-DROP TABLE IF EXISTS `idiomas`;
 CREATE TABLE IF NOT EXISTS `idiomas` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -9916,7 +9927,6 @@ INSERT INTO `idiomas` (`id`, `name`, `created_at`, `updated_at`, `deleted_at`) V
 /*!40000 ALTER TABLE `idiomas` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela fluente.migrations
-DROP TABLE IF EXISTS `migrations`;
 CREATE TABLE IF NOT EXISTS `migrations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `migration` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -9924,7 +9934,7 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Copiando dados para a tabela fluente.migrations: ~15 rows (aproximadamente)
+-- Copiando dados para a tabela fluente.migrations: ~16 rows (aproximadamente)
 DELETE FROM `migrations`;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -9947,7 +9957,6 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela fluente.niveis
-DROP TABLE IF EXISTS `niveis`;
 CREATE TABLE IF NOT EXISTS `niveis` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -9967,7 +9976,6 @@ INSERT INTO `niveis` (`id`, `name`, `created_at`, `updated_at`, `deleted_at`) VA
 /*!40000 ALTER TABLE `niveis` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela fluente.nivel_evento
-DROP TABLE IF EXISTS `nivel_evento`;
 CREATE TABLE IF NOT EXISTS `nivel_evento` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `nivel_id` int(10) unsigned NOT NULL,
@@ -9988,7 +9996,6 @@ DELETE FROM `nivel_evento`;
 /*!40000 ALTER TABLE `nivel_evento` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela fluente.notificacoes
-DROP TABLE IF EXISTS `notificacoes`;
 CREATE TABLE IF NOT EXISTS `notificacoes` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -9998,7 +10005,7 @@ CREATE TABLE IF NOT EXISTS `notificacoes` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Copiando dados para a tabela fluente.notificacoes: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela fluente.notificacoes: ~3 rows (aproximadamente)
 DELETE FROM `notificacoes`;
 /*!40000 ALTER TABLE `notificacoes` DISABLE KEYS */;
 INSERT INTO `notificacoes` (`id`, `name`, `created_at`, `updated_at`, `deleted_at`) VALUES
@@ -10008,7 +10015,6 @@ INSERT INTO `notificacoes` (`id`, `name`, `created_at`, `updated_at`, `deleted_a
 /*!40000 ALTER TABLE `notificacoes` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela fluente.paises
-DROP TABLE IF EXISTS `paises`;
 CREATE TABLE IF NOT EXISTS `paises` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -10018,7 +10024,7 @@ CREATE TABLE IF NOT EXISTS `paises` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=254 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Copiando dados para a tabela fluente.paises: ~252 rows (aproximadamente)
+-- Copiando dados para a tabela fluente.paises: ~253 rows (aproximadamente)
 DELETE FROM `paises`;
 /*!40000 ALTER TABLE `paises` DISABLE KEYS */;
 INSERT INTO `paises` (`id`, `name`, `created_at`, `updated_at`, `deleted_at`) VALUES
@@ -10278,7 +10284,6 @@ INSERT INTO `paises` (`id`, `name`, `created_at`, `updated_at`, `deleted_at`) VA
 /*!40000 ALTER TABLE `paises` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela fluente.perfis
-DROP TABLE IF EXISTS `perfis`;
 CREATE TABLE IF NOT EXISTS `perfis` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -10288,7 +10293,7 @@ CREATE TABLE IF NOT EXISTS `perfis` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Copiando dados para a tabela fluente.perfis: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela fluente.perfis: ~3 rows (aproximadamente)
 DELETE FROM `perfis`;
 /*!40000 ALTER TABLE `perfis` DISABLE KEYS */;
 INSERT INTO `perfis` (`id`, `name`, `created_at`, `updated_at`, `deleted_at`) VALUES
@@ -10298,7 +10303,6 @@ INSERT INTO `perfis` (`id`, `name`, `created_at`, `updated_at`, `deleted_at`) VA
 /*!40000 ALTER TABLE `perfis` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela fluente.questionarios
-DROP TABLE IF EXISTS `questionarios`;
 CREATE TABLE IF NOT EXISTS `questionarios` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -10317,7 +10321,6 @@ DELETE FROM `questionarios`;
 /*!40000 ALTER TABLE `questionarios` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela fluente.seguidores
-DROP TABLE IF EXISTS `seguidores`;
 CREATE TABLE IF NOT EXISTS `seguidores` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `aprovacao` tinyint(1) NOT NULL,
@@ -10339,7 +10342,6 @@ DELETE FROM `seguidores`;
 /*!40000 ALTER TABLE `seguidores` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela fluente.users
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -10364,22 +10366,21 @@ CREATE TABLE IF NOT EXISTS `users` (
   KEY `FK_users_enderecos` (`endereco_id`),
   CONSTRAINT `FK_users_enderecos` FOREIGN KEY (`endereco_id`) REFERENCES `enderecos` (`id`),
   CONSTRAINT `users_perfil_id_foreign` FOREIGN KEY (`perfil_id`) REFERENCES `perfis` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Copiando dados para a tabela fluente.users: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela fluente.users: ~4 rows (aproximadamente)
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `name`, `sobrenome`, `foto`, `idade`, `sexo`, `telefone`, `celular`, `email`, `formacao`, `endereco_id`, `habilidades`, `password`, `perfil_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
-	(3, 'Henry', 'Farias', NULL, NULL, 'M', NULL, NULL, 'henrysjfarias@gmail.com', NULL, 6, NULL, '$2y$10$a/LtGyLQsrIu8Brzkpex4uynGFMLQ8nsag7UPnCeoI9xB57ALlaOy', 2, '2017-10-13 15:49:41', '2017-10-13 15:49:41', NULL),
-	(4, 'Henry', 'Farias', NULL, NULL, 'M', NULL, NULL, 'professor@mail.com', 'formação', 7, 'habilidades', '$2y$10$xL2taasmHzN.N9E4dgsLqeyxyqPWITMWa6n6uCWKtrLimWX8Cgxjy', 3, '2017-10-13 19:31:22', '2017-10-13 19:31:22', NULL);
+	(9, 'Henry', 'Farias', NULL, NULL, 'M', NULL, NULL, 'henrysjfarias@gmail.com', NULL, 36, NULL, '$2y$10$OutjcwN3LhvImzrXLLZddeN31mONI7.Uyo86e8RNRDGdmKAIvjHh.', 2, '2017-10-17 23:43:13', '2017-10-17 23:43:13', NULL),
+	(10, 'Professor', 'Farias', NULL, NULL, 'M', NULL, NULL, 'professor@mail.com', 'letras', 37, 'tecnica', '$2y$10$DWO2fH6gXomwRzpbKT1EReFVRMbYCT0kA2KKRv0bGRkOzYCsw5fPi', 3, '2017-10-17 23:43:50', '2017-10-20 03:57:08', NULL),
+	(11, 'Henry2', 'Farias', NULL, NULL, 'M', NULL, NULL, 'mail@mail.com', NULL, 48, NULL, '$2y$10$cNgLZE6t46.UMdXf2MS.l.k7NfUGK87RWd9WGt3mSqNeVvssTYszy', 2, '2017-10-19 02:06:29', '2017-10-19 02:06:29', NULL),
+	(12, 'Henry3', 'Farias', NULL, NULL, 'M', NULL, NULL, 'mail3@mail.com', NULL, 49, NULL, '$2y$10$/ocmoX3JdBndGjB42XnIFe7J7yihIYbFdqUzxsJCsyak5lCyx77D2', 2, '2017-10-19 02:08:14', '2017-10-19 02:08:14', NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela fluente.user_evento
-DROP TABLE IF EXISTS `user_evento`;
 CREATE TABLE IF NOT EXISTS `user_evento` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `professor` tinyint(1) DEFAULT '0',
-  `dono` tinyint(1) NOT NULL DEFAULT '0',
   `evento_id` int(10) unsigned NOT NULL,
   `user_id` int(10) unsigned NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -10390,15 +10391,18 @@ CREATE TABLE IF NOT EXISTS `user_evento` (
   KEY `user_evento_user_id_foreign` (`user_id`),
   CONSTRAINT `user_evento_evento_id_foreign` FOREIGN KEY (`evento_id`) REFERENCES `eventos` (`id`),
   CONSTRAINT `user_evento_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Copiando dados para a tabela fluente.user_evento: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela fluente.user_evento: ~3 rows (aproximadamente)
 DELETE FROM `user_evento`;
 /*!40000 ALTER TABLE `user_evento` DISABLE KEYS */;
+INSERT INTO `user_evento` (`id`, `evento_id`, `user_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
+	(44, 31, 10, NULL, NULL, NULL),
+	(45, 31, 11, NULL, NULL, NULL),
+	(46, 31, 12, NULL, NULL, NULL);
 /*!40000 ALTER TABLE `user_evento` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela fluente.user_idioma
-DROP TABLE IF EXISTS `user_idioma`;
 CREATE TABLE IF NOT EXISTS `user_idioma` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `idioma_id` int(10) unsigned NOT NULL,
