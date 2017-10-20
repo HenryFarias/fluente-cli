@@ -11,8 +11,6 @@ export class ModalComponent implements OnInit {
     @ViewChild('modal')
     public modal: ElementRef;
 
-    constructor() {}
-
     ngOnInit() {}
 
     open() {

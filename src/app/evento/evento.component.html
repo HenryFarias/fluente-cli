@@ -8,7 +8,7 @@
             <h1 *ngIf="!routeId" class="text-center">CADASTRO EVENTO</h1>
             <h1 *ngIf="routeId" class="text-center">EDITAR EVENTO</h1>
 
-            <form action="" class="sky-form">
+            <div class="sky-form">
                 <fieldset>
                     <div class="row">
                         <section class="col col-md-6">
@@ -65,7 +65,7 @@
                             </label>
                         </section>
                         <section class="col col-md-4">
-                            <ss-multiselect-dropdown [options]="users" (ngModelChange)="onChange($event)" name="user" [(ngModel)]="user" [settings]="comboMultipleSettings" [texts]="comboMultipleTexts"></ss-multiselect-dropdown>
+                            <angular2-multiselect [data]="usersListDropdown" [(ngModel)]="usersSelecionados" [settings]="dropdownSettings"></angular2-multiselect>
                         </section>
                     </div>
                     <div class="row">
@@ -90,7 +90,7 @@
                     <button *ngIf="!routeId" type="button" (click)="saveEvento()" class="button">Salvar</button>
                     <button *ngIf="routeId" type="button" (click)="updateEvento()" class="button">Atualizar</button>
                 </footer>
-            </form>
+            </div>
         </div>
     </div>
 </div>

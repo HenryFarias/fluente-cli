@@ -12,6 +12,7 @@ import { LayoutModule } from '../layout/layout.module';
 import { EventoComponent } from './evento.component';
 import { MyDatePickerModule } from 'mydatepicker';
 import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
 
 
 const appRoutes: Routes = [
@@ -34,6 +35,7 @@ const appRoutes: Routes = [
         MyDatePickerModule,
         Ng2CompleterModule,
         MultiselectDropdownModule,
+        AngularMultiSelectModule,
     ],
     declarations: [
         EventoComponent,

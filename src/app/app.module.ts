@@ -1,10 +1,9 @@
+import { SelectComponent } from './util/select-multiplo/select.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpModule } from '@angular/http';
-
 import { AppComponent } from './app.component';
-
 import { LoginModule } from './login/login.module';
 import { CadastroModule } from './cadastro/cadastro.module';
 import { DashboardModule } from './dashboard/dashboard.module';
@@ -26,7 +25,8 @@ const appRoutes: Routes = [
     HttpModule,
   ],
   declarations: [
-    AppComponent
+    AppComponent,
+    SelectComponent,
   ],
   bootstrap: [ AppComponent ],
 })
