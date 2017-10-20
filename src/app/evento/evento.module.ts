@@ -1,3 +1,5 @@
+import { SelectComponent } from './../util/select-multiplo/select.component';
+import { SelectModule } from './../util/select-multiplo/select.module';
 import { ListaComponent } from './lista.component';
 import { MapsModule } from './../maps/maps.module';
 import { ModalModule } from './../util/modal/modal.module';
@@ -32,6 +34,7 @@ const appRoutes: Routes = [
         AlertModule,
         ModalModule,
         MapsModule,
+        SelectModule,
         MyDatePickerModule,
         Ng2CompleterModule,
         MultiselectDropdownModule,
@@ -39,7 +42,8 @@ const appRoutes: Routes = [
     ],
     declarations: [
         EventoComponent,
-        ListaComponent
+        ListaComponent,
+        SelectComponent,
     ],
     providers: [AppHttpService],
     exports: [EventoComponent]

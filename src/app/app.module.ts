@@ -1,4 +1,3 @@
-import { SelectComponent } from './util/select-multiplo/select.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
@@ -26,7 +25,6 @@ const appRoutes: Routes = [
   ],
   declarations: [
     AppComponent,
-    SelectComponent,
   ],
   bootstrap: [ AppComponent ],
 })

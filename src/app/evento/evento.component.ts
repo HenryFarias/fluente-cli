@@ -45,7 +45,7 @@ export class EventoComponent {
     ) {}
 
     ngOnInit() {
-        this.dropdownSettings = { 
+        this.dropdownSettings = {
             singleSelection: false, 
             text:"Participantes do evento",
             selectAllText:'Selecionar todos',
