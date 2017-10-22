@@ -217,6 +217,16 @@
     </div>
 </div>
 
-<!-- <MODAIS> -->
-<!-- <form-evento [openModal]="modalEvento"></form-evento> -->
-<!-- </MODAIS> -->
+<modal [classe]="modal-sm">
+    <div class="modal-header"><!-- modal header -->
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">AVISO</h4>
+    </div><!-- /modal header -->
+
+    <!-- modal body -->
+    <div class="modal-body">
+        Acesse suas configurações de usuário para completar seu cadastro!<br>
+        Lá você poderá configurar idiomas e níveis para localizar eventos com o seu perfil.
+    </div>
+    <!-- /modal body -->
+</modal>

@@ -17,13 +17,13 @@ export class User {
     public habilidades: string;
     public password: string;
     public logado: boolean = false;
-    public idioma: Idioma;
+    public idiomas: Idioma[];
     public nivel: Nivel;
     public notificacao: Notificacao;
     public endereco: Endereco;
 
     constructor() {
-        this.idioma = new Idioma();
+        this.idiomas = [];
         this.nivel = new Nivel();
         this.notificacao = new Notificacao();
         this.endereco = new Endereco();

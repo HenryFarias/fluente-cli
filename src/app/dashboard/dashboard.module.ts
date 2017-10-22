@@ -1,3 +1,4 @@
+import { ModalModule } from './../util/modal/modal.module';
 import { UserModule } from './../user/user.module';
 import { MapsModule } from './../maps/maps.module';
 import { EventoModule } from './../evento/evento.module';
@@ -27,6 +28,7 @@ const appRoutes: Routes = [
         EventoModule,
         MapsModule,
         UserModule,
+        ModalModule,
     ],
     declarations: [
         DashboardComponent,

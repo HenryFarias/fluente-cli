@@ -27,28 +27,16 @@
                     </div>
                     <div class="row">
                         <section class="col col-md-4">
-                            <label class="input">
-                                <input required name="idioma" [(ngModel)]="evento.idioma.name" placeholder="Iidoma*" type="text" list="listIdiomaEvento">
-                                <datalist id="listIdiomaEvento">
-                                    <option *ngFor="let idioma of idiomas" value="{{idioma.name}}"></option>
-                                </datalist>
-                            </label>
+                            <angular2-multiselect [data]="idiomasListDropdown" [(ngModel)]="idiomaSelecionado" 
+                            [settings]="idiomaSettings"></angular2-multiselect>
                         </section>
                         <section class="col col-md-4">
-                            <label class="input">
-                                <input required name="nivel" [(ngModel)]="evento.nivel.name" placeholder="Nível*" type="text" list="listNivelEvento">
-                                <datalist id="listNivelEvento">
-                                    <option *ngFor="let nivel of niveis" value="{{nivel.name}}"></option>
-                                </datalist>
-                            </label>
+                            <angular2-multiselect [data]="niveisListDropdown" [(ngModel)]="nivelSelecionado" 
+                            [settings]="nivelSettings"></angular2-multiselect>
                         </section>
                         <section class="col col-md-4">
-                            <label class="input">
-                                <input required name="professor" [(ngModel)]="evento.professor.name" placeholder="Professor" type="text" list="listProfessor">
-                                <datalist id="listProfessor">
-                                    <option *ngFor="let professor of professores" value="{{professor.name}}"></option>
-                                </datalist>
-                            </label>
+                            <angular2-multiselect [data]="professoresListDropdown" [(ngModel)]="professorSelecionado" 
+                            [settings]="professorSettings"></angular2-multiselect>
                         </section>
                     </div>
                     <div class="row">
@@ -65,8 +53,7 @@
                             </label>
                         </section>
                         <section class="col col-md-4">
-                            <select></select>
-                            <!-- <angular2-multiselect [data]="usersListDropdown" [(ngModel)]="usersSelecionados" [settings]="dropdownSettings"></angular2-multiselect> -->
+                            <angular2-multiselect [data]="usersListDropdown" [(ngModel)]="usersSelecionados" [settings]="userSettings"></angular2-multiselect>
                         </section>
                     </div>
                     <div class="row">

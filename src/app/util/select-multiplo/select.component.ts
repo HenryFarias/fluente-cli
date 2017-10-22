@@ -4,7 +4,7 @@ import { Component, OnInit, Input } from '@angular/core';
     selector: 'select',
     templateUrl: './select.component.html'
 })
-export class SelectComponent implements OnInit {
+export class SelectComponent {
 
     @Input()
     dropdownList = [];
@@ -34,13 +34,13 @@ export class SelectComponent implements OnInit {
             {"id":4,"itemName":"Canada"},
             {"id":5,"itemName":"South Korea"}
         ];
-        this.dropdownSettings = { 
+        this.dropdownSettings = {
             singleSelection: false, 
             text:"Select Countries",
             selectAllText:'Select All',
             unSelectAllText:'UnSelect All',
             enableSearchFilter: true,
-            classes:"myclass custom-class"
+            classes:""
         };
     }
 

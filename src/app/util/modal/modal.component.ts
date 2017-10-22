@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import { Component, ElementRef, ViewChild, Input } from '@angular/core';
 
 declare let $: any;
 
@@ -6,12 +6,13 @@ declare let $: any;
     selector: 'modal',
     templateUrl: './modal.component.html'
 })
-export class ModalComponent implements OnInit {
+export class ModalComponent {
 
     @ViewChild('modal')
     public modal: ElementRef;
 
-    ngOnInit() {}
+    @Input()
+    public classe: string = "";
 
     open() {
         $(this.modal.nativeElement).modal({

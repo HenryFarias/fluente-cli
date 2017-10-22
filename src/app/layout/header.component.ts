@@ -39,8 +39,9 @@ export class HeaderComponent {
         this.router.navigate(['/login']);
     }
 
-    public eventos() {
-        this.router.navigate(['/evento/list']);
+    public redirect(rota: string) {
+        this.router.navigate([rota]);
+        // this.router.navigate(['/evento/list']);
     }
 
     public setUser(user: User) {

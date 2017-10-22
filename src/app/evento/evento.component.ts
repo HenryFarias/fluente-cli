@@ -1,4 +1,3 @@
-// import { SelectComponent } from './../util/select-multiplo/select.component';
 import { UserService } from './../services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MapsService } from './../services/maps.service';
@@ -12,7 +11,7 @@ import { Component, Input, ViewChild } from '@angular/core';
 import { AppHttpService } from '../app/app-http.service';
 import { IMyDpOptions } from 'mydatepicker';
 
-// Select múltiplo - https://github.com/softsimon/angular-2-dropdown-multiselect - https://www.npmjs.com/package/angular2-multiselect-dropdown
+// Select múltiplo - https://www.npmjs.com/package/angular2-multiselect-dropdown
 
 @Component({
     templateUrl: './evento.component.html',
@@ -32,9 +31,22 @@ export class EventoComponent {
     public professores: User;
     public idiomas: Idioma;
     public routeId: number;
+
     public usersListDropdown: any[] = [];
     public usersSelecionados: any[] = [];
-    dropdownSettings = {};
+    public userSettings: any;
+
+    public professoresListDropdown: any[] = [];
+    public professorSelecionado: any[] = [];
+    public professorSettings: any;
+
+    public niveisListDropdown: any[] = [];
+    public nivelSelecionado: any[] = [];
+    public nivelSettings: any;
+
+    public idiomasListDropdown: any[] = [];
+    public idiomaSelecionado: any[] = [];
+    public idiomaSettings: any;
 
     constructor (
         private httpService: AppHttpService,
@@ -42,17 +54,14 @@ export class EventoComponent {
         private router: Router,
         private activatedRoute: ActivatedRoute,
         private userService: UserService,
+        private eventoService: EventoService,
     ) {}
 
     ngOnInit() {
-        this.dropdownSettings = {
-            singleSelection: false, 
-            text:"Participantes do evento",
-            selectAllText:'Selecionar todos',
-            unSelectAllText:'Desmarcar todos',
-            enableSearchFilter: true,
-            classes:""
-        };
+        this.userSettings = this.eventoService.settingsSelect("Participantes do evento", false);
+        this.professorSettings = this.eventoService.settingsSelect("Professor convidado", true);
+        this.nivelSettings = this.eventoService.settingsSelect("Nível", true);
+        this.idiomaSettings = this.eventoService.settingsSelect("Idioma", true);
 
         this.evento = new Evento();
 
@@ -61,9 +70,9 @@ export class EventoComponent {
         });
 
         this.httpService.builder('user').create().then((res) => {
-            this.niveis = res.data.niveis;
-            this.professores = res.data.professores;
-            this.idiomas = res.data.idiomas;
+            this.niveisListDropdown = this.eventoService.converterListaParaSelect(res.data.niveis);
+            this.professoresListDropdown = this.eventoService.converterListaParaSelect(res.data.professores);
+            this.idiomasListDropdown = this.eventoService.converterListaParaSelect(res.data.idiomas);
         }).catch(error => {
             var erro = error.json();
             this.message = error.json().error;
@@ -78,22 +87,9 @@ export class EventoComponent {
         }
     }
 
-    private converterListaParaSelect(users: any[]) {
-        users.forEach((user, index) => {
-            users[index] = {"id":user.id,"itemName":user.name};
-        });
-
-        return users;
-    }
-
-    private converterDataParaDatePicker(data: string) {
-        var array = data.split("-");
-        return { date: { year: array[0], month: array[1].replace("0", ""), day: array[2].replace("0", "") } };
-    }
-
     private getUsers() {
         this.userService.getAllForEvento(this.evento.dono).then((res) => {
-            this.usersListDropdown = this.converterListaParaSelect(res.data);
+            this.usersListDropdown = this.eventoService.converterListaParaSelect(res.data);
         }).catch(error => {
             var erro = error.json();
             this.message = error.json().error;
@@ -108,8 +104,8 @@ export class EventoComponent {
                 this.evento.professor = new User();
             }
             this.getUsers();
-            this.usersSelecionados = this.converterListaParaSelect(this.evento.users);
-            this.evento.data = this.converterDataParaDatePicker(this.evento.data);
+            this.usersSelecionados = this.eventoService.converterListaParaSelect(this.evento.users);
+            this.evento.data = this.eventoService.converterDataParaDatePicker(this.evento.data);
         }).catch(error => {
             var erro = error.json();
             this.message = error.json().error;
@@ -117,13 +113,12 @@ export class EventoComponent {
         });
     }
 
-    private formatarData(data: any) {
-        return new Date(data.year + "-" + data.month + "-" + data.day);
-    }
-
     public saveEvento() {
         this.evento.data = this.evento.data.jsdate;
         this.evento.users = this.usersSelecionados;
+        this.evento.idioma.id = this.idiomaSelecionado[0].id;
+        this.evento.nivel.id = this.nivelSelecionado[0].id;
+        this.evento.professor.id = this.professorSelecionado[0].id;
 
         this.httpService.builder('evento').save(this.evento).then((res) => {
             this.router.navigate(['/dashboard']);
@@ -139,7 +134,7 @@ export class EventoComponent {
         if (this.evento.data.jsdate) {
             this.evento.data = this.evento.data.jsdate;
         } else {
-            this.evento.data = this.formatarData(this.evento.data.date);
+            this.evento.data = this.eventoService.formatarData(this.evento.data.date);
         }
         
         this.httpService.builder('evento').update(this.evento.id, this.evento).then((res) => {
@@ -158,7 +153,6 @@ export class EventoComponent {
         this.evento.endereco.name = evento.formatted_address;
     }
 
-    // https://github.com/kekeh/mydatepicker
     public myDatePickerOptions: IMyDpOptions = {
         dateFormat: 'dd.mm.yyyy',
         dayLabels: {su: 'Dom', mo: 'Seg', tu: 'Ter', we: 'Qua', th: 'Qui', fr: 'Sex', sa: 'Sáb'},
