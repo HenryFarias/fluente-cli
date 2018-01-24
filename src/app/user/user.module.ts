@@ -3,6 +3,9 @@ import { Routes } from '@angular/router';
 import { GridUsersComponent } from './gridUsers.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
+import { AlertModule } from '../util/alert/alert.module';
+import { MapsModule } from '../maps/maps.module';
+import { FormsModule } from '@angular/forms';
 
 const appRoutes: Routes = [
     {path: 'usuario', children:[
@@ -13,6 +16,9 @@ const appRoutes: Routes = [
 @NgModule({
     imports: [
         BrowserModule,
+        AlertModule,
+        MapsModule,
+        FormsModule,
     ],
     declarations: [
         GridUsersComponent,

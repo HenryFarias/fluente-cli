@@ -46,6 +46,9 @@ export class FormCadastroComponent {
     }
 
     public saveUser() {
+
+        console.log(JSON.stringify(this.user));
+
         this.httpService.builder('user').save(this.user).then((res) => {
             this.user = res.data;
             this.user.logado = true;

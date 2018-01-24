@@ -1,34 +1,34 @@
 <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <alert *ngIf="message">
-                    {{message}}
-                </alert>
-    
-                <h1 class="text-center">{{user.name}}</h1>
-    
-                <div class="sky-form">
-                    <fieldset>
-                        <div class="row">
-                            <section class="col col-md-6">
-                                <label class="input">
-                                    <i class="icon-append fa fa-hotel"></i>
-                                    <input required name="name" [(ngModel)]="evento.name" type="text" placeholder="Título do evento">
-                                </label>
-                            </section>
-                            <section class="col col-md-6">
-                                <label class="input">
-                                    <i class="icon-append fa fa-hotel"></i>
-                                    <places *ngIf="!routeId" (emitirLatLong)="setMap($event)"></places>
-                                    <places *ngIf="routeId" [value]="evento.endereco.name" (emitirLatLong)="setMap($event)"></places>
-                                </label>
-                            </section>
-                        </div>
-                    </fieldset>
-                    <footer>
-                        <button type="button" (click)="updateEvento()" class="button">Atualizar</button>
-                    </footer>
-                </div>
+    <div class="row">
+        <div class="col-md-12">
+            <alert *ngIf="message">
+                {{message}}
+            </alert>
+
+            <h1 class="text-center">{{user.name}}</h1>
+
+            <div class="sky-form">
+                <fieldset>
+                    <div class="row">
+                        <section class="col col-md-6">
+                            <label class="input">
+                                <i class="icon-append fa fa-hotel"></i>
+                                <input required name="name" [(ngModel)]="evento.name" type="text" placeholder="Título do evento">
+                            </label>
+                        </section>
+                        <section class="col col-md-6">
+                            <label class="input">
+                                <i class="icon-append fa fa-hotel"></i>
+                                <places *ngIf="!routeId" (emitirLatLong)="setMap($event)"></places>
+                                <places *ngIf="routeId" [value]="evento.endereco.name" (emitirLatLong)="setMap($event)"></places>
+                            </label>
+                        </section>
+                    </div>
+                </fieldset>
+                <footer>
+                    <button type="button" (click)="updateEvento()" class="button">Atualizar</button>
+                </footer>
             </div>
         </div>
     </div>
+</div>

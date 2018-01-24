@@ -14,7 +14,7 @@
         <div *ngIf="user.logado" id="barMain">
             <nav class="nav-second">
                 <ul class="nav nav-pills nav-second">
-                    <li><a (click)="redirect('/usuario/edit/{{user.id}}')"><i class="fa fa-angle-right"></i> {{user.name}}</a></li>
+                    <li><a (click)="redirect('/usuario/edit/user.id')"><i class="fa fa-angle-right"></i> {{user.name}}</a></li>
                     <li><a (click)="redirect('/evento/list')"><i class="fa fa-angle-right"></i> Eventos</a></li>
                     <li><a (click)="sair()"><i class="fa fa-angle-right"></i> Sair</a></li>
                 </ul>
