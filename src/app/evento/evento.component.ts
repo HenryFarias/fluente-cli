@@ -1,21 +1,20 @@
-import { UserService } from './../services/user.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { MapsService } from './../services/maps.service';
-import { Idioma } from './../models/idioma';
-import { User } from './../models/user';
-import { Evento } from './../models/evento';
-import { Nivel } from './../models/nivel';
-import { ModalComponent } from './../util/modal/modal.component';
-import { EventoService } from './../services/evento.service';
-import { Component, Input, ViewChild } from '@angular/core';
-import { AppHttpService } from '../app/app-http.service';
-import { IMyDpOptions } from 'mydatepicker';
+import {UserService} from './../services/user.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {MapsService} from './../services/maps.service';
+import {Idioma} from './../models/idioma';
+import {User} from './../models/user';
+import {Evento} from './../models/evento';
+import {Nivel} from './../models/nivel';
+import {EventoService} from './../services/evento.service';
+import {Component, OnInit} from '@angular/core';
+import {AppHttpService} from '../app/app-http.service';
+import {IMyDpOptions} from 'mydatepicker';
 
 // Select múltiplo - https://www.npmjs.com/package/angular2-multiselect-dropdown
 
 @Component({
     templateUrl: './evento.component.html',
-    selector: 'form-evento',
+    selector: 'fluente-form-evento',
     styleUrls: ['./evento.component.css'],
     providers: [
         EventoService,
@@ -23,9 +22,9 @@ import { IMyDpOptions } from 'mydatepicker';
         UserService,
     ]
 })
-export class EventoComponent {
+export class EventoComponent implements OnInit {
 
-    public message:string = null;
+    public message: string = null;
     public niveis: Nivel;
     public evento: Evento;
     public professores: User;
@@ -57,6 +56,13 @@ export class EventoComponent {
         private eventoService: EventoService,
     ) {}
 
+    public myDatePickerOptions: IMyDpOptions = {
+        dateFormat: 'dd.mm.yyyy',
+        dayLabels: {su: 'Dom', mo: 'Seg', tu: 'Ter', we: 'Qua', th: 'Qui', fr: 'Sex', sa: 'Sáb'},
+        monthLabels: { 1: 'Jan', 2: 'Fev', 3: 'Mar', 4: 'Abr', 5: 'Mai', 6: 'Jun', 7: 'Jul', 8: 'Ago', 9: 'Set', 10: 'Out', 11: 'Nov', 12: 'Dez' },
+        todayBtnTxt: 'Hoje',
+    };
+
     ngOnInit() {
         this.userSettings = this.eventoService.settingsSelect("Participantes do evento", false);
         this.professorSettings = this.eventoService.settingsSelect("Professor convidado", true);
@@ -74,7 +80,7 @@ export class EventoComponent {
             this.professoresListDropdown = this.eventoService.converterListaParaSelect(res.data.professores);
             this.idiomasListDropdown = this.eventoService.converterListaParaSelect(res.data.idiomas);
         }).catch(error => {
-            var erro = error.json();
+            const erro = error.json();
             this.message = error.json().error;
             console.log(erro.error);
         });
@@ -91,7 +97,7 @@ export class EventoComponent {
         this.userService.getAllForEvento(this.evento.dono).then((res) => {
             this.usersListDropdown = this.eventoService.converterListaParaSelect(res.data);
         }).catch(error => {
-            var erro = error.json();
+            const erro = error.json();
             this.message = error.json().error;
             console.log(erro.error);
         });
@@ -107,26 +113,29 @@ export class EventoComponent {
             this.usersSelecionados = this.eventoService.converterListaParaSelect(this.evento.users);
             this.evento.data = this.eventoService.converterDataParaDatePicker(this.evento.data);
         }).catch(error => {
-            var erro = error.json();
+            const erro = error.json();
             this.message = error.json().error;
             console.log(erro.error);
         });
     }
 
     public saveEvento() {
-        this.evento.data = this.evento.data.jsdate;
-        this.evento.users = this.usersSelecionados;
-        this.evento.idioma.id = this.idiomaSelecionado[0].id;
-        this.evento.nivel.id = this.nivelSelecionado[0].id;
-        this.evento.professor.id = this.professorSelecionado[0].id;
 
-        this.httpService.builder('evento').save(this.evento).then((res) => {
-            this.router.navigate(['/dashboard']);
-        }).catch(error => {
-            var erro = error.json();
-            this.message = error.json().error;
-            console.log(erro.error);
-        });
+        console.log(this.evento.data);
+
+        // this.evento.data = this.evento.data.jsdate;
+        // this.evento.users = this.usersSelecionados;
+        // this.evento.idioma.id = this.idiomaSelecionado[0].id;
+        // this.evento.nivel.id = this.nivelSelecionado[0].id;
+        // this.evento.professor.id = this.professorSelecionado[0].id;
+
+        // this.httpService.builder('evento').save(this.evento).then((res) => {
+        //     this.router.navigate(['/dashboard']);
+        // }).catch(error => {
+        //     const erro = error.json();
+        //     this.message = error.json().error;
+        //     console.log(erro.error);
+        // });
     }
 
     public updateEvento() {
@@ -136,11 +145,11 @@ export class EventoComponent {
         } else {
             this.evento.data = this.eventoService.formatarData(this.evento.data.date);
         }
-        
+
         this.httpService.builder('evento').update(this.evento.id, this.evento).then((res) => {
             this.router.navigate(['/evento/list']);
         }).catch(error => {
-            var erro = error.json();
+            const erro = error.json();
             this.message = error.json().error;
             console.log(erro.error);
         });
@@ -152,11 +161,4 @@ export class EventoComponent {
         this.evento.endereco.cidade.name = this.mapsService.getCidade(evento);
         this.evento.endereco.name = evento.formatted_address;
     }
-
-    public myDatePickerOptions: IMyDpOptions = {
-        dateFormat: 'dd.mm.yyyy',
-        dayLabels: {su: 'Dom', mo: 'Seg', tu: 'Ter', we: 'Qua', th: 'Qui', fr: 'Sex', sa: 'Sáb'},
-        monthLabels: { 1: 'Jan', 2: 'Fev', 3: 'Mar', 4: 'Abr', 5: 'Mai', 6: 'Jun', 7: 'Jul', 8: 'Ago', 9: 'Set', 10: 'Out', 11: 'Nov', 12: 'Dez' },
-        todayBtnTxt: 'Hoje',
-    };
 }

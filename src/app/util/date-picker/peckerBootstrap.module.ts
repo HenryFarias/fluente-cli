@@ -1,17 +1,17 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {AlertComponent} from './alert.component';
+import {PickerBootstrapComponent} from './pickerBootstrap.component';
 
 @NgModule({
     imports: [
         BrowserModule,
     ],
     declarations: [
-        AlertComponent,
+        PickerBootstrapComponent,
     ],
     exports: [
-        AlertComponent,
+      PickerBootstrapComponent,
     ]
 })
 
-export class AlertModule {}
+export class PickerBootstrapModule {}

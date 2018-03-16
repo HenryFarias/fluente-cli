@@ -27,15 +27,15 @@
                     </div>
                     <div class="row">
                         <section class="col col-md-4">
-                            <angular2-multiselect [data]="idiomasListDropdown" [(ngModel)]="idiomaSelecionado" 
+                            <angular2-multiselect [data]="idiomasListDropdown" [(ngModel)]="idiomaSelecionado"
                             [settings]="idiomaSettings"></angular2-multiselect>
                         </section>
                         <section class="col col-md-4">
-                            <angular2-multiselect [data]="niveisListDropdown" [(ngModel)]="nivelSelecionado" 
+                            <angular2-multiselect [data]="niveisListDropdown" [(ngModel)]="nivelSelecionado"
                             [settings]="nivelSettings"></angular2-multiselect>
                         </section>
                         <section class="col col-md-4">
-                            <angular2-multiselect [data]="professoresListDropdown" [(ngModel)]="professorSelecionado" 
+                            <angular2-multiselect [data]="professoresListDropdown" [(ngModel)]="professorSelecionado"
                             [settings]="professorSettings"></angular2-multiselect>
                         </section>
                     </div>
@@ -43,7 +43,7 @@
                         <section class="col col-md-4">
                             <label class="input">
                                 <i class="icon-append fa fa-calendar"></i>
-                                <my-date-picker name="data" [options]="myDatePickerOptions" [(ngModel)]="evento.data" required></my-date-picker>
+                                <fluente-picker-bootstrap [(ngModel)]="evento.data"></fluente-picker-bootstrap>
                             </label>
                         </section>
                         <section class="col col-md-4">
