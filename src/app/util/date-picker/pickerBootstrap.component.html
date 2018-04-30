@@ -1,1 +1,1 @@
-<input data-provide="datepicker" class="datepicker">
+<input data-provide="datepicker" #datePicker [(ngModel)]="value" (blur)="value = datePicker.value" class="datepicker">

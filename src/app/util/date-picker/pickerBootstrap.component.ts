@@ -1,35 +1,32 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR, NgModel} from '@angular/forms';
-import {ValueAccessorBase} from '../value-acessor';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {Component, ElementRef, forwardRef, OnInit, ViewChild} from '@angular/core';
+
+const noop = () => {
+};
 
 declare var $: any;
 
-export const SLIDER_VALUE_ACCESSOR: any = {
+export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: PickerBootstrapComponent,
+    useExisting: forwardRef(() => PickerBootstrapComponent),
     multi: true
 };
 
 @Component({
-    selector: 'fluente-picker-bootstrap',
+    selector: 'picker',
     templateUrl: './pickerBootstrap.component.html',
     providers: [
-        SLIDER_VALUE_ACCESSOR
+        CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR
     ]
 })
-export class PickerBootstrapComponent implements OnInit, ValueAccessorBase<any> {
-    @ViewChild(NgModel) dadosEnvio: NgModel;
+export class PickerBootstrapComponent implements OnInit, ControlValueAccessor {
 
-    handleInput(prop, value) {
-        if(!this.value){
-          this.value = new DadosEnvio();
-        }
-        this.value[prop] = value;
-        this.value = { ...this.value };
-    }
+    private innerValue: any = '';
 
+    private onTouchedCallback: () => void = noop;
+    private onChangeCallback: (_: any) => void = noop;
 
-  ngOnInit(): void {
+    ngOnInit(): void {
         this.traduzirDatePicker();
 
         $('.datepicker').datepicker({
@@ -38,6 +35,35 @@ export class PickerBootstrapComponent implements OnInit, ValueAccessorBase<any> 
             weekStart: 0,
             todayHighlight: true
         });
+    }
+
+    get value(): any {
+        return this.innerValue;
+    }
+
+    set value(v: any) {
+        if (v !== this.innerValue) {
+            this.innerValue = v;
+            this.onChangeCallback(v);
+        }
+    }
+
+    onBlur() {
+        this.onTouchedCallback();
+    }
+
+    writeValue(value: any) {
+        if (value !== this.innerValue) {
+            this.innerValue = value;
+        }
+    }
+
+    registerOnChange(fn: any) {
+        this.onChangeCallback = fn;
+    }
+
+    registerOnTouched(fn: any) {
+        this.onTouchedCallback = fn;
     }
 
     private traduzirDatePicker() {

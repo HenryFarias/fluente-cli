@@ -8,7 +8,6 @@ import {Nivel} from './../models/nivel';
 import {EventoService} from './../services/evento.service';
 import {Component, OnInit} from '@angular/core';
 import {AppHttpService} from '../app/app-http.service';
-import {IMyDpOptions} from 'mydatepicker';
 
 // Select múltiplo - https://www.npmjs.com/package/angular2-multiselect-dropdown
 
@@ -56,13 +55,6 @@ export class EventoComponent implements OnInit {
         private eventoService: EventoService,
     ) {}
 
-    public myDatePickerOptions: IMyDpOptions = {
-        dateFormat: 'dd.mm.yyyy',
-        dayLabels: {su: 'Dom', mo: 'Seg', tu: 'Ter', we: 'Qua', th: 'Qui', fr: 'Sex', sa: 'Sáb'},
-        monthLabels: { 1: 'Jan', 2: 'Fev', 3: 'Mar', 4: 'Abr', 5: 'Mai', 6: 'Jun', 7: 'Jul', 8: 'Ago', 9: 'Set', 10: 'Out', 11: 'Nov', 12: 'Dez' },
-        todayBtnTxt: 'Hoje',
-    };
-
     ngOnInit() {
         this.userSettings = this.eventoService.settingsSelect("Participantes do evento", false);
         this.professorSettings = this.eventoService.settingsSelect("Professor convidado", true);
@@ -109,6 +101,11 @@ export class EventoComponent implements OnInit {
             if (!this.evento.professor) {
                 this.evento.professor = new User();
             }
+
+            this.nivelSelecionado = this.eventoService.converterListaParaSelect([this.evento.nivel]);
+            this.professorSelecionado = this.eventoService.converterListaParaSelect([this.evento.professor]);
+            this.nivelSelecionado = this.eventoService.converterListaParaSelect([this.evento.idioma]);
+
             this.getUsers();
             this.usersSelecionados = this.eventoService.converterListaParaSelect(this.evento.users);
             this.evento.data = this.eventoService.converterDataParaDatePicker(this.evento.data);
@@ -120,31 +117,22 @@ export class EventoComponent implements OnInit {
     }
 
     public saveEvento() {
+        this.evento.users = this.usersSelecionados;
+        this.evento.idioma.id = this.idiomaSelecionado[0].id;
+        this.evento.nivel.id = this.nivelSelecionado[0].id;
+        this.evento.professor.id = this.professorSelecionado[0].id;
 
-        console.log(this.evento.data);
-
-        // this.evento.data = this.evento.data.jsdate;
-        // this.evento.users = this.usersSelecionados;
-        // this.evento.idioma.id = this.idiomaSelecionado[0].id;
-        // this.evento.nivel.id = this.nivelSelecionado[0].id;
-        // this.evento.professor.id = this.professorSelecionado[0].id;
-
-        // this.httpService.builder('evento').save(this.evento).then((res) => {
-        //     this.router.navigate(['/dashboard']);
-        // }).catch(error => {
-        //     const erro = error.json();
-        //     this.message = error.json().error;
-        //     console.log(erro.error);
-        // });
+        this.httpService.builder('evento').save(this.evento).then((res) => {
+            this.router.navigate(['/dashboard']);
+        }).catch(error => {
+            const erro = error.json();
+            this.message = error.json().error;
+            console.log(erro.error);
+        });
     }
 
     public updateEvento() {
         this.evento.users = this.usersSelecionados;
-        if (this.evento.data.jsdate) {
-            this.evento.data = this.evento.data.jsdate;
-        } else {
-            this.evento.data = this.eventoService.formatarData(this.evento.data.date);
-        }
 
         this.httpService.builder('evento').update(this.evento.id, this.evento).then((res) => {
             this.router.navigate(['/evento/list']);
