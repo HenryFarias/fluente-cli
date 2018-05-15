@@ -14,15 +14,20 @@ import {AlertModule} from '../util/alert/alert.module';
 import {ModalModule} from '../util/modal/modal.module';
 import {MapsModule} from '../maps/maps.module';
 import {SelectComponent} from '../util/select-multiplo/select.component';
+import {Security} from '../security/security';
 
 
 const appRoutes: Routes = [
-    {path: 'evento', children: [
-        { path: '', component: EventoComponent},
-        { path: 'list', component: ListaComponent},
-        { path: 'edit/:id', component: EventoComponent},
-        { path: ':id', component: EventoComponent},
-    ]}
+    {
+        path: 'evento',
+        canActivateChild: [Security],
+        children: [
+            { path: '', component: EventoComponent},
+            { path: 'list', component: ListaComponent},
+            { path: 'edit/:id', component: EventoComponent},
+            { path: ':id', component: EventoComponent},
+        ]
+    }
 ];
 
 @NgModule({

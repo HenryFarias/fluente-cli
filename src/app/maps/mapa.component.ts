@@ -11,22 +11,22 @@ import { AgmCoreModule, MapsAPILoader } from '@agm/core';
     templateUrl: './mapa.component.html',
     selector: 'mapa',
     styleUrls: ['./mapa.component.css'],
-    providers: [ 
+    providers: [
         EventoService,
     ]
 })
 export class MapaComponent implements OnInit {
 
     public map: any;
-    public message:string = null;
-    public eventos : Evento[] = [];
+    public message: string = null;
+    public eventos: Evento[] = [];
 
     @Input()
     public latitude;
-    
+
     @Input()
     public longitude;
-    
+
     @Input()
     public zoom;
 
@@ -44,13 +44,13 @@ export class MapaComponent implements OnInit {
             this.eventos = res.data;
             this.eventos = this.castToNumber(this.eventos);
         }).catch(error => {
-            var erro = error.json();
+            const erro = error.json();
             this.message = "Nenhum evento disponível";
             console.log(erro.error);
         });
     }
 
-    private castToNumber(eventos : Evento[]) {
+    private castToNumber(eventos: Evento[]) {
         eventos.forEach((evento) => {
             evento.endereco.latitude = Number(evento.endereco.latitude);
             evento.endereco.longitude = Number(evento.endereco.longitude);

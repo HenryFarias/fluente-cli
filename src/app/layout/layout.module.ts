@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule }  from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 
 import { HeaderComponent } from './header.component';
 import { FooterComponent } from './footer.component';
+import {Security} from '../security/security';
 
 
 const appRoutes: Routes = [
-    { path: '' , component: HeaderComponent, outlet: 'header'},
-    { path: '' , component: FooterComponent, outlet: 'footer'}
+    { path: '' , component: HeaderComponent, canActivateChild: [Security], outlet: 'header'},
+    { path: '' , component: FooterComponent, canActivateChild: [Security], outlet: 'footer'}
 ];
 
 @NgModule({
@@ -20,7 +21,7 @@ const appRoutes: Routes = [
         HeaderComponent,
         FooterComponent,
     ],
-    exports: [ 
+    exports: [
         HeaderComponent,
         FooterComponent,
     ]

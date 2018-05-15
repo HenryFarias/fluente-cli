@@ -102,9 +102,11 @@ export class EventoComponent implements OnInit {
                 this.evento.professor = new User();
             }
 
+            console.log(this.eventoService.converterListaParaSelect([this.evento.professor]));
+
             this.nivelSelecionado = this.eventoService.converterListaParaSelect([this.evento.nivel]);
             this.professorSelecionado = this.eventoService.converterListaParaSelect([this.evento.professor]);
-            this.nivelSelecionado = this.eventoService.converterListaParaSelect([this.evento.idioma]);
+            this.idiomaSelecionado = this.eventoService.converterListaParaSelect([this.evento.idioma]);
 
             this.getUsers();
             this.usersSelecionados = this.eventoService.converterListaParaSelect(this.evento.users);
@@ -133,6 +135,9 @@ export class EventoComponent implements OnInit {
 
     public updateEvento() {
         this.evento.users = this.usersSelecionados;
+        this.evento.idioma.id = this.idiomaSelecionado[0].id;
+        this.evento.nivel.id = this.nivelSelecionado[0].id;
+        this.evento.professor.id = this.professorSelecionado[0].id;
 
         this.httpService.builder('evento').update(this.evento.id, this.evento).then((res) => {
             this.router.navigate(['/evento/list']);

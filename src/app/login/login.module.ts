@@ -9,12 +9,17 @@ import { PerfilComponent } from './perfil.component';
 import { FormLoginComponent } from './formLogin.component';
 import { LayoutModule } from '../layout/layout.module';
 import { AlertModule } from '../util/alert/alert.module';
+import {Security} from '../security/security';
 
 
 const appRoutes: Routes = [
-    {path: 'login', children:[
-        { path: '', component: LoginComponent}
-    ]}
+    {
+        path: 'login',
+        canActivateChild: [Security],
+        children: [{
+            path: '', component: LoginComponent
+        }]
+    }
 ];
 
 @NgModule({

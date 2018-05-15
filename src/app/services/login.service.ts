@@ -9,12 +9,16 @@ export class LoginService {
 
     constructor(private http: Http) {}
 
-    autenticate(user: User) {
-        let url = 'http://localhost/arquitetura-rest/public/login';
-        
+    public autenticate(user: User) {
+        const url = 'http://localhost/arquitetura-rest/public/login';
+
         return this.http.post(url, user).toPromise().then((res) => {
             return res.json() || {};
-        })
+        });
+    }
+
+    public exit() {
+
     }
 }
 

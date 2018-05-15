@@ -2,7 +2,7 @@ import { AlertModule } from './../util/alert/alert.module';
 import { PlacesComponent } from './places.component';
 import { MapaComponent } from './mapa.component';
 import { NgModule } from '@angular/core';
-import { BrowserModule }  from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { AgmCoreModule } from '@agm/core';
 
 @NgModule({

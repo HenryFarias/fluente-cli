@@ -1,5 +1,5 @@
 import { EmitUser } from './../shared/emitUser.service';
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import '../../assets/css/styles.css';
 
@@ -9,7 +9,7 @@ import { User } from '../models/user';
     templateUrl: './header.component.html',
     providers: [EmitUser]
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
 
     public user: User;
 
@@ -33,9 +33,9 @@ export class HeaderComponent {
         }
     }
 
-    public sair() {
-        this.user.logado = false;
-        sessionStorage.setItem("user", JSON.stringify(this.user));
+    public exit() {
+        this.user = new User();
+        sessionStorage.clear();
         this.router.navigate(['/login']);
     }
 
@@ -43,9 +43,4 @@ export class HeaderComponent {
         this.router.navigate([rota]);
         // this.router.navigate(['/evento/list']);
     }
-
-    public setUser(user: User) {
-        this.user = user;
-    }
-
 }
