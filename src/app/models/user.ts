@@ -1,7 +1,7 @@
-import { Idioma } from './idioma';
-import { Nivel } from './nivel';
-import { Notificacao } from './notificacao';
-import { Endereco } from './endereco';
+import {Idioma} from './idioma';
+import {Nivel} from './nivel';
+import {Notificacao} from './notificacao';
+import {Endereco} from './endereco';
 
 export class User {
 

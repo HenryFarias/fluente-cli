@@ -12,7 +12,6 @@ import { LoginModule } from '../login/login.module';
 import { AlertModule } from '../util/alert/alert.module';
 import { FormCadastroTecnicoComponent } from './formCadastroTecnico.component';
 import {Security} from '../security/security';
-import {SecurityModule} from '../security/security.module';
 
 
 const appRoutes: Routes = [
@@ -35,7 +34,6 @@ const appRoutes: Routes = [
         AlertModule,
         ModalModule,
         MapsModule,
-        SecurityModule,
     ],
     declarations: [
         CadastroComponent,

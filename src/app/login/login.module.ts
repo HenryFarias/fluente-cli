@@ -1,21 +1,19 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule }  from '@angular/platform-browser';
-import { RouterModule, Routes } from '@angular/router';
-import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {RouterModule, Routes} from '@angular/router';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
-import { AppHttpService } from '../app/app-http.service';
-import { LoginComponent } from './login.component';
-import { PerfilComponent } from './perfil.component';
-import { FormLoginComponent } from './formLogin.component';
-import { LayoutModule } from '../layout/layout.module';
-import { AlertModule } from '../util/alert/alert.module';
-import {Security} from '../security/security';
+import {AppHttpService} from '../app/app-http.service';
+import {LoginComponent} from './login.component';
+import {PerfilComponent} from './perfil.component';
+import {FormLoginComponent} from './formLogin.component';
+import {LayoutModule} from '../layout/layout.module';
+import {AlertModule} from '../util/alert/alert.module';
 
 
 const appRoutes: Routes = [
     {
         path: 'login',
-        canActivateChild: [Security],
         children: [{
             path: '', component: LoginComponent
         }]
@@ -39,5 +37,4 @@ const appRoutes: Routes = [
     providers: [AppHttpService],
     exports: [FormLoginComponent]
 })
-
 export class LoginModule {}

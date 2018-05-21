@@ -7,17 +7,28 @@ import {Observable} from 'rxjs/Observable';
 export class Security implements CanActivate, OnInit, CanActivateChild {
 
     constructor (
-        private user: User,
         private router: Router
     ) {}
 
     ngOnInit(): void {
-        this.user = JSON.parse(sessionStorage.getItem("user"));
+
+    }
+
+    private getUser(): User {
+        let user: User;
+        user = JSON.parse(sessionStorage.getItem("user"));
+
+        if (!user) {
+            user = new User();
+        }
+
+        return user;
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-        if (!this.user.logado) {
+        if (!this.getUser().logado) {
             this.router.navigate(['/login']);
+            return false;
         }
 
         return true;
@@ -25,8 +36,9 @@ export class Security implements CanActivate, OnInit, CanActivateChild {
 
     canActivateChild(childRoute: ActivatedRouteSnapshot,
                      state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-        if (!this.user.logado) {
+        if (!this.getUser().logado) {
             this.router.navigate(['/login']);
+            return false;
         }
 
         return true;
